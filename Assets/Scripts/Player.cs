@@ -5,6 +5,8 @@ public class Player : MonoBehaviour
 {
 
 	public Transform groundCheck;
+	public Transform leftWallCheck;
+	public Transform rightWallCheck;
 	public float currentSpeed;
 
 	private ParkourState currentState;

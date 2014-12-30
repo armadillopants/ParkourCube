@@ -67,4 +67,73 @@ public abstract class ParkourState : State
 
 		return null;
 	}
+
+	protected bool TryVault()
+	{
+		VaultingState state = GetVaultState();
+
+		if (state != null)
+		{
+			owner.SetState(state);
+			return true;
+		}
+
+		return false;
+	}
+
+	protected VaultingState GetVaultState()
+	{
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			return new VaultingState(owner);
+		}
+
+		return null;
+	}
+
+	protected bool TryWallRun()
+	{
+		WallRunningState state = GetWallRunState();
+
+		if (state != null)
+		{
+			owner.SetState(state);
+			return true;
+		}
+
+		return false;
+	}
+
+	protected WallRunningState GetWallRunState()
+	{
+		if (Input.GetKey(KeyCode.Space))
+		{
+			return new WallRunningState(owner);
+		}
+
+		return null;
+	}
+
+	protected bool TrySlide()
+	{
+		SlidingState state = GetSlideState();
+
+		if (state != null)
+		{
+			owner.SetState(state);
+			return true;
+		}
+
+		return false;
+	}
+
+	protected SlidingState GetSlideState()
+	{
+		if (Input.GetKeyDown(KeyCode.S))
+		{
+			return new SlidingState(owner);
+		}
+
+		return null;
+	}
 }

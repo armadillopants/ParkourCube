@@ -17,10 +17,7 @@ public class RunningState : ParkourState
 
 		owner.Move(Vector2.right);
 
-		if (TryJump())
-		{
-			return;
-		}
+		if (TryJump()) { return; }
 	}
 
 	public override void Exit()
