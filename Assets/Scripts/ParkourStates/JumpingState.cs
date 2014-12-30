@@ -17,16 +17,6 @@ public class JumpingState : ParkourState
 
 		jumpTime = 0f;
 		velocity = Vector2.right;
-
-		if (Physics2D.Linecast(owner.transform.position, owner.rightWallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
-		{
-			velocity = -Vector2.right;
-		}
-
-		if (Physics2D.Linecast(owner.transform.position, owner.leftWallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
-		{
-			velocity = Vector2.right;
-		}
 	}
 
 	public override void Update()
@@ -35,7 +25,7 @@ public class JumpingState : ParkourState
 
 		if (Physics2D.Linecast(owner.transform.position, owner.groundCheck.position, 1 << LayerMask.NameToLayer("Vault")))
 		{
-			if (TryVault()) { return;  }
+			if (TryVault()) { return; }
 		}
 
 		if (Physics2D.Linecast(owner.transform.position, owner.rightWallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
