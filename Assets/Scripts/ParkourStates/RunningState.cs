@@ -19,6 +19,11 @@ public class RunningState : ParkourState
 
 		if (TryJump()) { return; }
 		if (TrySlide()) { return; }
+
+		if (!Physics2D.Linecast(owner.transform.position, owner.groundCheck.position, 1 << LayerMask.NameToLayer("Ground")))
+		{
+			if (TryFall()) { return; }
+		}
 	}
 
 	public override void Exit()

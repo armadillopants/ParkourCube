@@ -36,13 +36,20 @@ public abstract class ParkourState : State
 
 	protected bool TryRun()
 	{
+		RunningState state = GetRunState();
+
+		if (state != null)
+		{
+			owner.SetState(state);
+			return true;
+		}
 
 		return false;
 	}
 
 	protected RunningState GetRunState()
 	{
-		return null;
+		return new RunningState(owner);
 	}
 
 	protected bool TryJump()
@@ -181,5 +188,23 @@ public abstract class ParkourState : State
 		}
 
 		return null;
+	}
+
+	protected bool TryFall()
+	{
+		FallingState state = GetFallState();
+
+		if (state != null)
+		{
+			owner.SetState(state);
+			return true;
+		}
+
+		return false;
+	}
+
+	protected FallingState GetFallState()
+	{
+		return new FallingState(owner);
 	}
 }
