@@ -21,7 +21,7 @@ public class HangingState : ParkourState
 	{
 		base.Update();
 
-		if (TryTransitionToWall()) { return; }
+		if (TryJump()) { return; }
 
 		hangTime += Time.fixedDeltaTime;
 

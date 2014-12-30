@@ -7,15 +7,19 @@ public class Player : MonoBehaviour
 	public Transform groundCheck;
 	public Transform leftWallCheck;
 	public Transform rightWallCheck;
+	public Transform vaultCheck;
 	public float currentSpeed;
 
 	private ParkourState currentState;
 	private Rigidbody2D rigid;
 
+	public KeyWatcher spaceKey;
 
 	void Start()
 	{
 		rigid = rigidbody2D;
+
+		spaceKey = new KeyWatcher(KeyCode.Space);
 
 		currentState = new RunningState(this);
 		currentState.SetPreviousState(currentState);
@@ -24,6 +28,8 @@ public class Player : MonoBehaviour
 
 	void FixedUpdate()
 	{
+		spaceKey.Update();
+
 		currentState.Update();
 	}
 

@@ -12,6 +12,8 @@ public class FallingState : ParkourState
 	public override void Enter()
 	{
 		base.Enter();
+
+		velocity = Vector2.right;
 	}
 
 	public override void Update()

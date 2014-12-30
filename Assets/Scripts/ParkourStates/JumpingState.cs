@@ -9,6 +9,8 @@ public class JumpingState : ParkourState
 	private float jumpStrength = 6f;
 	private float jumpTime;
 
+	private float castLine;
+
 	public JumpingState(Player player) : base(player) { }
 
 	public override void Enter()
@@ -16,21 +18,42 @@ public class JumpingState : ParkourState
 		base.Enter();
 
 		jumpTime = 0f;
+		castLine = 0f;
 		velocity = Vector2.right;
+
+		if (Physics2D.Linecast(owner.transform.position, owner.rightWallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
+		{
+			velocity = -Vector2.right;
+		}
+
+		if (Physics2D.Linecast(owner.transform.position, owner.leftWallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
+		{
+			velocity = Vector2.right;
+		}
 	}
 
 	public override void Update()
 	{
 		base.Update();
 
-		if (Physics2D.Linecast(owner.transform.position, owner.groundCheck.position, 1 << LayerMask.NameToLayer("Vault")))
-		{
-			if (TryVault()) { return; }
-		}
+		castLine += Time.fixedDeltaTime;
 
-		if (Physics2D.Linecast(owner.transform.position, owner.rightWallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
+		if (castLine > 0.1f)
 		{
-			if (TryWallRun()) { return; }
+			if (Physics2D.Linecast(owner.transform.position, owner.vaultCheck.position, 1 << LayerMask.NameToLayer("Vault")))
+			{
+				if (TryVault()) { return; }
+			}
+
+			if (Physics2D.Linecast(owner.transform.position, owner.rightWallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
+			{
+				if (TryWallRun()) { return; }
+			}
+
+			if (Physics2D.Linecast(owner.transform.position, owner.leftWallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
+			{
+				if (TryWallRun()) { return; }
+			}
 		}
 
 		jumpTime += Time.fixedDeltaTime;

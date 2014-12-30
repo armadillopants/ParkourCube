@@ -67,7 +67,7 @@ public abstract class ParkourState : State
 
 	protected JumpingState GetJumpState()
 	{
-		if (Input.GetKey(KeyCode.Space))
+		if (owner.spaceKey.Down())
 		{
 			return new JumpingState(owner);
 		}
@@ -90,7 +90,7 @@ public abstract class ParkourState : State
 
 	protected VaultingState GetVaultState()
 	{
-		if (Input.GetKey(KeyCode.Space))
+		if (owner.spaceKey.Pressed())
 		{
 			return new VaultingState(owner);
 		}
@@ -113,7 +113,7 @@ public abstract class ParkourState : State
 
 	protected WallRunningState GetWallRunState()
 	{
-		if (Input.GetKey(KeyCode.Space))
+		if (owner.spaceKey.Pressed())
 		{
 			return new WallRunningState(owner);
 		}
@@ -182,7 +182,7 @@ public abstract class ParkourState : State
 
 	protected HangingState GetHangState()
 	{
-		if (Input.GetKeyUp(KeyCode.Space))
+		if (owner.spaceKey.Up())
 		{
 			return new HangingState(owner);
 		}
@@ -206,28 +206,5 @@ public abstract class ParkourState : State
 	protected FallingState GetFallState()
 	{
 		return new FallingState(owner);
-	}
-
-	protected bool TryTransitionToWall()
-	{
-		TransitionToWallState state = GetTransitionState();
-
-		if (state != null)
-		{
-			owner.SetState(state);
-			return true;
-		}
-
-		return false;
-	}
-
-	protected TransitionToWallState GetTransitionState()
-	{
-		if (Input.GetKey(KeyCode.Space))
-		{
-			return new TransitionToWallState(owner);
-		}
-
-		return null;
 	}
 }
