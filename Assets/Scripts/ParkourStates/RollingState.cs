@@ -2,7 +2,7 @@
 using System.Collections;
 using Hack.States;
 
-public class RollingState : State
+public class RollingState : ParkourState
 {
 
 	public override void Enter()
