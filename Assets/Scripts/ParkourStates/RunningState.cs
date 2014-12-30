@@ -15,8 +15,6 @@ public class RunningState : ParkourState
 	{
 		base.Update();
 
-		Debug.Log("Running");
-
 		owner.Move(Vector2.right);
 
 		if (TryJump()) { return; }
