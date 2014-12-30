@@ -136,7 +136,7 @@ public abstract class ParkourState : State
 
 	protected SlidingState GetSlideState()
 	{
-		if (Input.GetKey(KeyCode.S))
+		if (owner.sKey.Down())
 		{
 			return new SlidingState(owner);
 		}

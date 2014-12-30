@@ -14,12 +14,14 @@ public class Player : MonoBehaviour
 	private Rigidbody2D rigid;
 
 	public KeyWatcher spaceKey;
+	public KeyWatcher sKey;
 
 	void Start()
 	{
 		rigid = rigidbody2D;
 
 		spaceKey = new KeyWatcher(KeyCode.Space);
+		sKey = new KeyWatcher(KeyCode.S);
 
 		currentState = new RunningState(this);
 		currentState.SetPreviousState(currentState);
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour
 	void FixedUpdate()
 	{
 		spaceKey.Update();
+		sKey.Update();
 
 		currentState.Update();
 	}

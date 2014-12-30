@@ -9,7 +9,7 @@ public class JumpingState : ParkourState
 	private float jumpStrength = 6f;
 	private float jumpTime;
 
-	private float castLine;
+	private float castLineTime;
 
 	public JumpingState(Player player) : base(player) { }
 
@@ -18,7 +18,7 @@ public class JumpingState : ParkourState
 		base.Enter();
 
 		jumpTime = 0f;
-		castLine = 0f;
+		castLineTime = 0f;
 		velocity = Vector2.right;
 
 		if (Physics2D.Linecast(owner.transform.position, owner.rightWallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
@@ -36,9 +36,9 @@ public class JumpingState : ParkourState
 	{
 		base.Update();
 
-		castLine += Time.fixedDeltaTime;
+		castLineTime += Time.fixedDeltaTime;
 
-		if (castLine > 0.1f)
+		if (castLineTime > 0.1f)
 		{
 			if (Physics2D.Linecast(owner.transform.position, owner.vaultCheck.position, 1 << LayerMask.NameToLayer("Vault")))
 			{
