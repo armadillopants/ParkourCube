@@ -49,8 +49,8 @@ public class JumpingState : ParkourState
 		{
 			velocity.y -= gravity * Time.fixedDeltaTime;
 
-			RaycastHit2D hit;
-			if (Physics2D.Linecast(owner.transform.position, owner.groundCheck.position, 1 << LayerMask.NameToLayer("Ground")))
+			RaycastHit2D hit = Physics2D.Linecast(owner.transform.position, owner.groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+			if(hit)
 			{
 				owner.transform.position = hit.point;
 				owner.SetState(new RunningState(owner));

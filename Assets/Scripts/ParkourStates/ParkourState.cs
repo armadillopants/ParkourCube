@@ -136,4 +136,50 @@ public abstract class ParkourState : State
 
 		return null;
 	}
+
+	protected bool TryRoll()
+	{
+		RollingState state = GetRollState();
+
+		if (state != null)
+		{
+			owner.SetState(state);
+			return true;
+		}
+
+		return false;
+	}
+
+	protected RollingState GetRollState()
+	{
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			return new RollingState(owner);
+		}
+
+		return null;
+	}
+
+	protected bool TryHang()
+	{
+		HangingState state = GetHangState();
+
+		if (state != null)
+		{
+			owner.SetState(state);
+			return true;
+		}
+
+		return false;
+	}
+
+	protected HangingState GetHangState()
+	{
+		if (Input.GetKeyUp(KeyCode.Space))
+		{
+			return new HangingState(owner);
+		}
+
+		return null;
+	}
 }
