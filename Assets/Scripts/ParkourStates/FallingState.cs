@@ -29,6 +29,11 @@ public class FallingState : ParkourState
 		}
 
 		owner.Move(velocity);
+
+		if (owner.transform.eulerAngles != Vector3.zero)
+		{
+			LeanTween.rotateZ(owner.gameObject, 0, 5f * Time.fixedDeltaTime);
+		}
 	}
 
 	public override void Exit()

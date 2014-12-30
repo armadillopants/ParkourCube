@@ -28,6 +28,7 @@ public class SlidingState : ParkourState
 		}
 
 		owner.Move(Vector2.right * slideSpeed);
+		LeanTween.rotateZ(owner.gameObject, 45, 5f * Time.fixedDeltaTime);
 	}
 
 	public override void Exit()

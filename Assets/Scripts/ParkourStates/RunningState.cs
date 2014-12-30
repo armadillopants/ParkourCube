@@ -24,6 +24,11 @@ public class RunningState : ParkourState
 		{
 			if (TryFall()) { return; }
 		}
+
+		if (owner.transform.eulerAngles != Vector3.zero)
+		{
+			LeanTween.rotateZ(owner.gameObject, 0f, 5f * Time.fixedDeltaTime);
+		}
 	}
 
 	public override void Exit()
