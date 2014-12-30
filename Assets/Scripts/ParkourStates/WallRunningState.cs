@@ -4,6 +4,7 @@ using Hack.States;
 
 public class WallRunningState : ParkourState
 {
+	public WallRunningState(Player player) : base(player) { }
 
 	public override void Enter()
 	{

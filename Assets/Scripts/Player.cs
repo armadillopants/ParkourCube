@@ -9,7 +9,9 @@ public class Player : MonoBehaviour
 
 	void Start()
 	{
-
+		currentState = new RunningState(this);
+		currentState.SetPreviousState(currentState);
+		currentState.Enter();
 	}
 
 	void FixedUpdate()

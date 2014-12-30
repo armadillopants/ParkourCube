@@ -62,7 +62,7 @@ public abstract class ParkourState : State
 	{
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			return new JumpingState();
+			return new JumpingState(owner);
 		}
 
 		return null;
