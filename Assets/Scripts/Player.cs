@@ -4,10 +4,6 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
 
-	public Transform groundCheck;
-	public Transform leftWallCheck;
-	public Transform rightWallCheck;
-	public Transform vaultCheck;
 	public float currentSpeed;
 
 	private ParkourState currentState;

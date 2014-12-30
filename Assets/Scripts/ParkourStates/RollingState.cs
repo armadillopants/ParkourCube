@@ -15,6 +15,8 @@ public class RollingState : ParkourState
 	public override void Update()
 	{
 		base.Update();
+
+		LeanTween.rotateZ(owner.gameObject, 360f, 5f * Time.fixedDeltaTime);
 	}
 
 	public override void Exit()

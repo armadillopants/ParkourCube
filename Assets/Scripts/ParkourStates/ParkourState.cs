@@ -159,7 +159,7 @@ public abstract class ParkourState : State
 
 	protected RollingState GetRollState()
 	{
-		if (Input.GetKey(KeyCode.Space))
+		if (owner.spaceKey.Down())
 		{
 			return new RollingState(owner);
 		}

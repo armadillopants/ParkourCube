@@ -22,7 +22,7 @@ public class FallingState : ParkourState
 
 		velocity.y -= gravity * Time.fixedDeltaTime;
 
-		if (Physics2D.Linecast(owner.transform.position, owner.groundCheck.position, 1 << LayerMask.NameToLayer("Ground")))
+		if (Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0, 0.4f, 0), 1 << LayerMask.NameToLayer("Ground")))
 		{
 			owner.SetState(new RunningState(owner));
 			return;

@@ -21,12 +21,12 @@ public class JumpingState : ParkourState
 		castLineTime = 0f;
 		velocity = Vector2.right;
 
-		if (Physics2D.Linecast(owner.transform.position, owner.rightWallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
+		if (Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.5f, 0, 0), 1 << LayerMask.NameToLayer("Wall")))
 		{
 			velocity = -Vector2.right;
 		}
 
-		if (Physics2D.Linecast(owner.transform.position, owner.leftWallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
+		if (Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0.5f, 0, 0), 1 << LayerMask.NameToLayer("Wall")))
 		{
 			velocity = Vector2.right;
 		}
@@ -40,17 +40,17 @@ public class JumpingState : ParkourState
 
 		if (castLineTime > 0.1f)
 		{
-			if (Physics2D.Linecast(owner.transform.position, owner.vaultCheck.position, 1 << LayerMask.NameToLayer("Vault")))
+			if (Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.5f, -0.2f, 0), 1 << LayerMask.NameToLayer("Vault")))
 			{
 				if (TryVault()) { return; }
 			}
 
-			if (Physics2D.Linecast(owner.transform.position, owner.rightWallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
+			if (Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.5f, 0, 0), 1 << LayerMask.NameToLayer("Wall")))
 			{
 				if (TryWallRun()) { return; }
 			}
 
-			if (Physics2D.Linecast(owner.transform.position, owner.leftWallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
+			if (Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0.5f, 0, 0), 1 << LayerMask.NameToLayer("Wall")))
 			{
 				if (TryWallRun()) { return; }
 			}
@@ -62,7 +62,7 @@ public class JumpingState : ParkourState
 		{
 			velocity.y -= gravity * Time.fixedDeltaTime;
 
-			if(Physics2D.Linecast(owner.transform.position, owner.groundCheck.position, 1 << LayerMask.NameToLayer("Ground")))
+			if(Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0, 0.4f, 0), 1 << LayerMask.NameToLayer("Ground")))
 			{
 				owner.SetState(new RunningState(owner));
 				return;

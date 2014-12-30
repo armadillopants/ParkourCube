@@ -30,12 +30,12 @@ public class WallRunningState : ParkourState
 
 		owner.Move(Vector2.up);
 
-		if (Physics2D.Linecast(owner.transform.position, owner.rightWallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
+		if (Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.5f, 0, 0), 1 << LayerMask.NameToLayer("Wall")))
 		{
 			LeanTween.rotateZ(owner.gameObject, 45, 5f * Time.fixedDeltaTime);
 		}
 
-		if (Physics2D.Linecast(owner.transform.position, owner.leftWallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
+		if (Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0.5f, 0, 0), 1 << LayerMask.NameToLayer("Wall")))
 		{
 			LeanTween.rotateZ(owner.gameObject, -45, 5f * Time.fixedDeltaTime);
 		}

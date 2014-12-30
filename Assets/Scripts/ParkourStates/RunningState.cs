@@ -20,7 +20,7 @@ public class RunningState : ParkourState
 		if (TryJump()) { return; }
 		if (TrySlide()) { return; }
 
-		if (!Physics2D.Linecast(owner.transform.position, owner.groundCheck.position, 1 << LayerMask.NameToLayer("Ground")))
+		if (!Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0, 0.4f, 0), 1 << LayerMask.NameToLayer("Ground")))
 		{
 			if (TryFall()) { return; }
 		}
