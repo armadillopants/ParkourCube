@@ -5,18 +5,30 @@ using Hack.States;
 public class RollingState : ParkourState
 {
 
+	private float rollTime;
+
 	public RollingState(Player player) : base(player) { }
 
 	public override void Enter()
 	{
 		base.Enter();
+
+		rollTime = 0f;
 	}
 
 	public override void Update()
 	{
 		base.Update();
 
-		LeanTween.rotateZ(owner.gameObject, 360f, 5f * Time.fixedDeltaTime);
+		LeanTween.rotateAround(owner.gameObject, Vector3.forward, -360f, 1.5f * Time.fixedDeltaTime);
+
+		rollTime += Time.fixedDeltaTime;
+
+		if (rollTime > 1f)
+		{
+			//owner.SetState(new RunningState(owner));
+			//return;
+		}
 	}
 
 	public override void Exit()
