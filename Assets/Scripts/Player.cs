@@ -5,9 +5,12 @@ public class Player : MonoBehaviour
 {
 
 	public float currentSpeed;
+	[HideInInspector]
+	public Vector2 velocity;
 
 	private ParkourState currentState;
 	private Rigidbody2D rigid;
+	private LayerMask playerLayer;
 
 	public KeyWatcher spaceKey;
 	public KeyWatcher sKey;
@@ -18,6 +21,8 @@ public class Player : MonoBehaviour
 
 		spaceKey = new KeyWatcher(KeyCode.Space);
 		sKey = new KeyWatcher(KeyCode.S);
+
+		playerLayer = ~(1 << LayerMask.NameToLayer("Player"));
 
 		currentState = new RunningState(this);
 		currentState.SetPreviousState(currentState);
@@ -44,5 +49,10 @@ public class Player : MonoBehaviour
 	public void Move(Vector2 direction)
 	{
 		rigid.position += direction * currentSpeed * Time.fixedDeltaTime;
+	}
+
+	public LayerMask GetLayerMask()
+	{
+		return playerLayer;
 	}
 }

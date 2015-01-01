@@ -36,5 +36,15 @@ public class HangingState : ParkourState
 	public override void Exit()
 	{
 		base.Exit();
+
+		if (Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.5f, 0.2f, 0), owner.GetLayerMask()))
+		{
+			owner.velocity = -Vector2.right;
+		}
+
+		if (Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(-0.5f, 0.2f, 0), owner.GetLayerMask()))
+		{
+			owner.velocity = Vector2.right;
+		}
 	}
 }

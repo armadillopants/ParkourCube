@@ -9,18 +9,22 @@ public class RunningState : ParkourState
 	public override void Enter()
 	{
 		base.Enter();
+
+		owner.velocity = Vector2.right;
 	}
 
 	public override void Update()
 	{
 		base.Update();
 
-		owner.Move(Vector2.right);
+		owner.Move(owner.velocity);
 
 		if (TryJump()) { return; }
 		if (TrySlide()) { return; }
 
-		if (!Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0, 0.4f, 0), 1 << LayerMask.NameToLayer("Ground")))
+		RaycastHit2D hit = Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0, 0.4f, 0), owner.GetLayerMask());
+
+		if (hit.collider == null)
 		{
 			if (TryFall()) { return; }
 		}

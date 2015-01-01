@@ -4,7 +4,6 @@ using Hack.States;
 
 public class JumpingState : ParkourState
 {
-	private Vector2 velocity;
 	private float gravity = 6f;
 	private float jumpStrength = 6f;
 	private float jumpTime;
@@ -19,17 +18,6 @@ public class JumpingState : ParkourState
 
 		jumpTime = 0f;
 		castLineTime = 0f;
-		velocity = Vector2.right;
-
-		if (Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.5f, 0, 0), 1 << LayerMask.NameToLayer("Wall")))
-		{
-			velocity = -Vector2.right;
-		}
-
-		if (Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0.5f, 0, 0), 1 << LayerMask.NameToLayer("Wall")))
-		{
-			velocity = Vector2.right;
-		}
 	}
 
 	public override void Update()
@@ -40,17 +28,23 @@ public class JumpingState : ParkourState
 
 		if (castLineTime > 0.1f)
 		{
-			if (Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.5f, -0.2f, 0), 1 << LayerMask.NameToLayer("Vault")))
+			RaycastHit2D vaultHit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.5f, -0.2f, 0), owner.GetLayerMask());
+
+			if (vaultHit.collider != null && vaultHit.transform.position.y < owner.transform.position.y)
 			{
 				if (TryVault()) { return; }
 			}
 
-			if (Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.5f, 0, 0), 1 << LayerMask.NameToLayer("Wall")))
+			RaycastHit2D rightWallHit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.5f, 0.2f, 0), owner.GetLayerMask());
+
+			if (rightWallHit.collider != null)
 			{
 				if (TryWallRun()) { return; }
 			}
 
-			if (Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0.5f, 0, 0), 1 << LayerMask.NameToLayer("Wall")))
+			RaycastHit2D leftWallHit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(-0.5f, 0.2f, 0), owner.GetLayerMask());
+
+			if (leftWallHit.collider != null)
 			{
 				if (TryWallRun()) { return; }
 			}
@@ -60,9 +54,11 @@ public class JumpingState : ParkourState
 
 		if (jumpTime > 0.2f)
 		{
-			velocity.y -= gravity * Time.fixedDeltaTime;
+			owner.velocity.y -= gravity * Time.fixedDeltaTime;
 
-			if(Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0, 0.4f, 0), 1 << LayerMask.NameToLayer("Ground")))
+			RaycastHit2D hit = Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0, 0.4f, 0), owner.GetLayerMask());
+
+			if(hit.collider != null)
 			{
 				owner.SetState(new RunningState(owner));
 				return;
@@ -70,10 +66,10 @@ public class JumpingState : ParkourState
 		}
 		else
 		{
-			velocity.y += jumpStrength * Time.fixedDeltaTime;
+			owner.velocity.y += jumpStrength * Time.fixedDeltaTime;
 		}
 
-		owner.Move(velocity);
+		owner.Move(owner.velocity);
 
 		if (owner.transform.eulerAngles != Vector3.zero)
 		{

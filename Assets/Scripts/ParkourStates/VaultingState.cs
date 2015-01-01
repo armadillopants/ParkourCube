@@ -14,6 +14,7 @@ public class VaultingState : ParkourState
 		base.Enter();
 
 		vaultTime = 0f;
+		owner.velocity = Vector2.right;
 	}
 
 	public override void Update()
@@ -27,7 +28,7 @@ public class VaultingState : ParkourState
 			if (TryRun()) { return; }
 		}
 
-		owner.Move(Vector2.right * speedBoost);
+		owner.Move(owner.velocity * speedBoost);
 	}
 
 	public override void Exit()
