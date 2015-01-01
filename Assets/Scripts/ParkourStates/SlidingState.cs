@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using Hack.States;
 
 public class SlidingState : ParkourState
 {
