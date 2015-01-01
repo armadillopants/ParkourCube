@@ -17,8 +17,6 @@ public class FallingState : ParkourState
 
 		lastPosition = owner.transform.position;
 
-		Debug.Log("Entered");
-
 		velocity = Vector2.right;
 	}
 

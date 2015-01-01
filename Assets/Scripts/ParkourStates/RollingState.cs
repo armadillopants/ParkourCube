@@ -13,26 +13,34 @@ public class RollingState : ParkourState
 	{
 		base.Enter();
 
-		rollTime = 0f;
+		rollTime = 0.3f;
 	}
 
 	public override void Update()
 	{
 		base.Update();
 
-		LeanTween.rotateAround(owner.gameObject, Vector3.forward, -360f, 1.5f * Time.fixedDeltaTime);
+		rollTime -= Time.fixedDeltaTime;
 
-		rollTime += Time.fixedDeltaTime;
-
-		if (rollTime > 1f)
+		if (rollTime > 0f)
 		{
-			//owner.SetState(new RunningState(owner));
-			//return;
+			owner.transform.Rotate(-Vector3.forward, 600f * Time.fixedDeltaTime);
+			LeanTween.scaleY(owner.gameObject, 0.5f, 5f * Time.fixedDeltaTime);
 		}
+		else
+		{
+			owner.SetState(new RunningState(owner));
+			return;
+		}
+
+		owner.Move(Vector2.right);
 	}
 
 	public override void Exit()
 	{
 		base.Exit();
+
+		LeanTween.scaleY(owner.gameObject, 0.7f, 5f * Time.fixedDeltaTime);
+		owner.transform.eulerAngles = Vector3.zero;
 	}
 }

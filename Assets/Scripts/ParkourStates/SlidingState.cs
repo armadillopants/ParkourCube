@@ -22,7 +22,7 @@ public class SlidingState : ParkourState
 
 		slideTime += Time.fixedDeltaTime;
 
-		if (slideTime > 0.2f)
+		if (slideTime > 0.3f)
 		{
 			if (TryRun()) { return; }
 		}
