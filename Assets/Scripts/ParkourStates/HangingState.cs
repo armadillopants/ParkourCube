@@ -15,6 +15,11 @@ public class HangingState : ParkourState
 
 		hangTime = 0f;
 		hangPos = owner.transform.position;
+
+		if (!Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.5f, 0.2f, 0), owner.GetLayerMask()))
+		{
+			if (TryRun()) { return; }
+		}
 	}
 
 	public override void Update()

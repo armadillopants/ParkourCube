@@ -38,7 +38,7 @@ public class WallRunningState : ParkourState
 			LeanTween.rotateZ(owner.gameObject, 45, 5f * Time.fixedDeltaTime);
 		}
 
-		RaycastHit2D leftWallHit = Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0.5f, 0.2f, 0), owner.GetLayerMask());
+		RaycastHit2D leftWallHit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(-0.5f, 0.2f, 0), owner.GetLayerMask());
 
 		if (leftWallHit.collider != null)
 		{
