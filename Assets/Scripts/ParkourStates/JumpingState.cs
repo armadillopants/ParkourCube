@@ -5,6 +5,7 @@ public class JumpingState : ParkourState
 	private float gravity = 6f;
 	private float jumpStrength = 6f;
 	private float jumpTime;
+	private Vector3 lastPosition;
 
 	private float castLineTime;
 
@@ -33,6 +34,13 @@ public class JumpingState : ParkourState
 				if (TryVault()) { return; }
 			}
 
+			RaycastHit2D kongVaultHit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0f, -1f, 0), owner.GetLayerMask());
+
+			if (kongVaultHit.collider != null && owner.transform.position.y > kongVaultHit.transform.position.y && kongVaultHit.transform.localScale.x < owner.transform.localScale.x)
+			{
+				if (TryKongVault()) { return; }
+			}
+
 			RaycastHit2D rightWallHit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.5f, 0.2f, 0), owner.GetLayerMask());
 
 			if (rightWallHit.collider != null)
@@ -56,8 +64,14 @@ public class JumpingState : ParkourState
 
 			RaycastHit2D hit = Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0, 0.4f, 0), owner.GetLayerMask());
 
-			if(hit.collider != null)
+			if (hit.collider != null)
 			{
+				if (Vector2.Distance(owner.transform.position, lastPosition) > 3f)
+				{
+					if (TryRoll()) { return; }
+					else { Debug.Log("Dead"); return; }
+				}
+
 				owner.SetState(new RunningState(owner));
 				return;
 			}
@@ -65,6 +79,7 @@ public class JumpingState : ParkourState
 		else
 		{
 			owner.velocity.y += jumpStrength * Time.fixedDeltaTime;
+			lastPosition = owner.transform.position;
 		}
 
 		owner.Move(owner.velocity);

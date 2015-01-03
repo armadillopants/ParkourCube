@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 
-public class VaultingState : ParkourState
+public class KongVaultingState : ParkourState
 {
 	private float speedBoost = 3f;
+	private float yMod = 1.5f;
 	private float vaultTime;
 
-	public VaultingState(Player player) : base(player) { }
+	public KongVaultingState(Player player) : base(player) { }
 
 	public override void Enter()
 	{
@@ -24,9 +25,13 @@ public class VaultingState : ParkourState
 		if (vaultTime > 0.2f)
 		{
 			owner.SetState(new RunningState(owner));
+			return;
 		}
 
+		owner.velocity.y += yMod * Time.fixedDeltaTime;
 		owner.Move(owner.velocity * speedBoost);
+
+		LeanTween.rotateZ(owner.gameObject, -45, 5f * Time.fixedDeltaTime);
 	}
 
 	public override void Exit()

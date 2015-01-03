@@ -30,7 +30,7 @@ public class HangingState : ParkourState
 
 		if (hangTime > 0.2f)
 		{
-			if (TryFall()) { return; }
+			owner.SetState(new FallingState(owner));
 		}
 
 		owner.transform.position = hangPos;

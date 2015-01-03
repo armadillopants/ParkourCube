@@ -19,22 +19,24 @@ public class SlidingState : ParkourState
 	{
 		base.Update();
 
+		if (TryJump()) { return; }
+
 		slideTime += Time.fixedDeltaTime;
 
 		if (slideTime > 0.3f)
 		{
-			if (TryRun()) { return; }
+			owner.SetState(new RunningState(owner));
 		}
 
 		RaycastHit2D hit = Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0, 0.6f, 0), owner.GetLayerMask());
 
 		if (hit.collider == null)
 		{
-			if (TryFall()) { return; }
+			owner.SetState(new FallingState(owner));
 		}
 
 		owner.Move(owner.velocity * slideSpeed);
-		LeanTween.rotateZ(owner.gameObject, 45, 5f * Time.fixedDeltaTime);
+		LeanTween.rotateZ(owner.gameObject, 65, 5f * Time.fixedDeltaTime);
 	}
 
 	public override void Exit()

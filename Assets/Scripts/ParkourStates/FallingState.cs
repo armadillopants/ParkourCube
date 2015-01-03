@@ -14,8 +14,6 @@ public class FallingState : ParkourState
 		base.Enter();
 
 		lastPosition = owner.transform.position;
-
-		owner.velocity = Vector2.right;
 	}
 
 	public override void Update()

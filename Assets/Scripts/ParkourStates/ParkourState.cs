@@ -97,6 +97,29 @@ public abstract class ParkourState : State
 		return null;
 	}
 
+	protected bool TryKongVault()
+	{
+		KongVaultingState state = GetKongVaultState();
+
+		if (state != null)
+		{
+			owner.SetState(state);
+			return true;
+		}
+
+		return false;
+	}
+
+	protected KongVaultingState GetKongVaultState()
+	{
+		if (owner.spaceKey.Pressed())
+		{
+			return new KongVaultingState(owner);
+		}
+
+		return null;
+	}
+
 	protected bool TryWallRun()
 	{
 		WallRunningState state = GetWallRunState();

@@ -24,7 +24,7 @@ public class RunningState : ParkourState
 
 		if (hit.collider == null)
 		{
-			if (TryFall()) { return; }
+			owner.SetState(new FallingState(owner));
 		}
 
 		if (owner.transform.eulerAngles != Vector3.zero)
