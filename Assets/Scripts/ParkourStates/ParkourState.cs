@@ -229,4 +229,27 @@ public abstract class ParkourState : State
 	{
 		return new FallingState(owner);
 	}
+
+	protected bool TryPullUp()
+	{
+		PullUpState state = GetPullUpState();
+
+		if (state != null)
+		{
+			owner.SetState(state);
+			return true;
+		}
+
+		return false;
+	}
+
+	protected PullUpState GetPullUpState()
+	{
+		if (owner.spaceKey.Down())
+		{
+			return new PullUpState(owner);
+		}
+
+		return null;
+	}
 }

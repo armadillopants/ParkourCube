@@ -24,7 +24,20 @@ public class WallRunningState : ParkourState
 
 		if (wallRunTime > 0.5f)
 		{
+			if (!Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.5f, 0.2f, 0), owner.GetLayerMask()))
+			{
+				owner.SetState(new HoldingOnState(owner));
+				return;
+			}
+
+			if (!Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(-0.5f, 0.2f, 0), owner.GetLayerMask()))
+			{
+				owner.SetState(new HoldingOnState(owner));
+				return;
+			}
+
 			owner.SetState(new HangingState(owner));
+			return;
 		}
 
 		owner.Move(owner.velocity);
