@@ -75,7 +75,6 @@ public class JumpingState : ParkourState
 				owner.SetState(new RunningState(owner));
 				return;
 			}
-			//if (TryFall()) { return; }
 		}
 		else
 		{

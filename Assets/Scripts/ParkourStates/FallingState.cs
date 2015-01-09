@@ -13,8 +13,6 @@ public class FallingState : ParkourState
 	{
 		base.Enter();
 
-		//owner.Move(owner.velocity); // Removes 1 frame of "no movement" when switching to falling state from jumping state
-
 		lastPosition = owner.transform.position;
 	}
 
