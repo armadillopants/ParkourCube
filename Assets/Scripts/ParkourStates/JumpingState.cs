@@ -3,7 +3,7 @@
 public class JumpingState : ParkourState
 {
 	private float gravity = 6f;
-	private float jumpStrength = 6f;
+	private float jumpStrength = 4f;
 	private float jumpTime;
 	private Vector3 lastPosition;
 
@@ -58,7 +58,7 @@ public class JumpingState : ParkourState
 
 		jumpTime += Time.fixedDeltaTime;
 
-		if (jumpTime > 0.2f)
+		if (jumpTime > 0.3f)
 		{
 			owner.velocity.y -= gravity * Time.fixedDeltaTime;
 
@@ -75,6 +75,7 @@ public class JumpingState : ParkourState
 				owner.SetState(new RunningState(owner));
 				return;
 			}
+			//if (TryFall()) { return; }
 		}
 		else
 		{

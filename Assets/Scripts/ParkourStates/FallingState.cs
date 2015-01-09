@@ -13,6 +13,8 @@ public class FallingState : ParkourState
 	{
 		base.Enter();
 
+		//owner.Move(owner.velocity); // Removes 1 frame of "no movement" when switching to falling state from jumping state
+
 		lastPosition = owner.transform.position;
 	}
 
@@ -28,7 +30,7 @@ public class FallingState : ParkourState
 		{
 			if (Vector2.Distance(owner.transform.position, lastPosition) > 3f)
 			{
-				if (TryRoll()) { return; } 
+				if (TryRoll()) { return; }
 				else { Debug.Log("Dead"); return; }
 			}
 

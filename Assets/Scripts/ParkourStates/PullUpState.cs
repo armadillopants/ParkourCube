@@ -1,36 +1,42 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class PullUpState : ParkourState
 {
+
+	private float lerpTime = 0.3f;
+	private float travelDistance = 2f;
+	private Vector3 startPos;
+	private Vector3 endPos;
+	private float currentLerpTime;
 
 	public PullUpState(Player player) : base(player) { }
 
 	public override void Enter()
 	{
 		base.Enter();
+
+		currentLerpTime = 0f;
+		startPos = owner.transform.position;
+		endPos = owner.transform.position + owner.transform.up + owner.transform.right * travelDistance;
 	}
 
 	public override void Update()
 	{
 		base.Update();
 
-		RaycastHit2D hit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(1f, 0f, 0f), owner.GetLayerMask());
+		currentLerpTime += Time.fixedDeltaTime;
 
-		if (hit.collider != null)
+		if (currentLerpTime > lerpTime)
 		{
-			Vector2 wallNormal = hit.normal;
-
-			float newY = hit.collider.transform.lossyScale.y / 1.5f + hit.collider.transform.position.y; // divides to get the normal and adds the height to get top position
-			newY -= owner.transform.position.y;
-			newY += owner.transform.lossyScale.y / 2 + 0.1f;
-
-			// find new position to move to
-			Vector3 moveTo = -wallNormal * 1.5f; // flips normal of collider.z to face opposite of player.z
-			moveTo.y = Mathf.Lerp(moveTo.y, newY, 100 * Time.fixedDeltaTime);
-
-			owner.transform.position += moveTo;
+			currentLerpTime = lerpTime;
+			owner.SetState(new RunningState(owner));
+			return;
 		}
+
+		float percentage = currentLerpTime / lerpTime;
+		owner.transform.position = Vector3.Lerp(startPos, endPos, percentage);
+
+		LeanTween.rotateZ(owner.gameObject, -25, 5f * Time.fixedDeltaTime);
 	}
 
 	public override void Exit()
