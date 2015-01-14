@@ -221,5 +221,32 @@ public static class Extensions
 	public static GameObject RootGameObject(this Rigidbody2D obj) { return obj.transform.root.gameObject; }
 	#endregion
 
+	#region Relativity
+	public static bool IsAbove(this Transform trans, Transform other)
+	{
+		return trans.position.y > other.position.y;
+	}
+
+	public static bool IsBelow(this Transform trans, Transform other)
+	{
+		return trans.position.y < other.position.y;
+	}
+
+	public static bool IsLeftOf(this Transform trans, Transform other)
+	{
+		return trans.position.x > other.position.x;
+	}
+
+	public static bool IsRightOf(this Transform trans, Transform other)
+	{
+		return trans.position.x < other.position.x;
+	}
+
+	public static bool IsOverlapping(this Transform trans, Transform other)
+	{
+		return trans.collider.bounds.Intersects(other.collider.bounds);
+	}
+	#endregion
+
 	#endregion
 }
