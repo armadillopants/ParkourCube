@@ -1,5 +1,6 @@
 ﻿using Hack.States;
 using System;
+using UnityEngine;
 
 public abstract class ParkourState : State
 {
@@ -227,7 +228,14 @@ public abstract class ParkourState : State
 
 	protected FallingState GetFallState()
 	{
-		return new FallingState(owner);
+		RaycastHit2D hit = Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0, 0.4f, 0), owner.GetLayerMask());
+
+		if (hit.collider == null)
+		{
+			return new FallingState(owner);
+		}
+
+		return null;
 	}
 
 	protected bool TryPullUp()

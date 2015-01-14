@@ -19,13 +19,7 @@ public class RunningState : ParkourState
 
 		if (TryJump()) { return; }
 		if (TrySlide()) { return; }
-
-		RaycastHit2D hit = Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0, 0.4f, 0), owner.GetLayerMask());
-
-		if (hit.collider == null)
-		{
-			owner.SetState(new FallingState(owner));
-		}
+		if (TryFall()) { return; }
 
 		if (owner.transform.eulerAngles != Vector3.zero)
 		{
