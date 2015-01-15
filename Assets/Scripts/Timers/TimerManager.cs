@@ -12,7 +12,6 @@ public class TimerManager : MSingleton<TimerManager>
 
 	void Update()
 	{
-		List<Timer> toDelete = new List<Timer>();
 		for(int i=0; i<timers.Count; ++i)//foreach(Timer timer in timers)
 		{
 			timers[i].Update();

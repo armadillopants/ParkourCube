@@ -35,6 +35,14 @@ public static class Extensions
 	}
 
 	/// <summary>
+	/// Returns true if the string is null or empty.
+	/// </summary>
+	public static bool IsNullOrEmpty(this string source)
+	{
+		return String.IsNullOrEmpty(source);
+	}
+
+	/// <summary>
 	/// Creates an object of type T from the given string, if possible.
 	/// </summary>
 	/// <typeparam name="T">The type to convert to.</typeparam>
@@ -89,6 +97,16 @@ public static class Extensions
 	/// Get the root GameObject.
 	/// </summary>
 	public static GameObject RootGameObject(this Collider obj) { return obj.transform.root.gameObject; }
+
+	/// <summary>
+	/// Get the root Transform.
+	/// </summary>
+	public static Transform RootTransform(this Collider2D obj) { return obj.transform.root; }
+
+	/// <summary>
+	/// Get the root GameObject.
+	/// </summary>
+	public static GameObject RootGameObject(this Collider2D obj) { return obj.transform.root.gameObject; }
 
 	/// <summary>
 	/// Get the root Transform.

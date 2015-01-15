@@ -89,7 +89,7 @@ public class World : Singleton<World>
 		GameObject uTerrain = WorldObject.GetTerrain();
 		uTerrain.transform.position = lastSpawned.transform.position;
 		Vector3 uTScale = uTerrain.transform.localScale;
-		uTScale.x = obstacle.GetSize();
+		uTScale.x = obstacle.size;
 		uTerrain.transform.localScale = uTScale;
 
 		// Create the terrain ahead of it.

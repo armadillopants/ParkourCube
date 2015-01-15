@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class InputMonitor : MonoBehaviour
+public class InputMonitor : MSingleton<InputMonitor>
 {
 #if UNITY_ANDROID
 	private const float HOLD_MAG = 0.2f;
