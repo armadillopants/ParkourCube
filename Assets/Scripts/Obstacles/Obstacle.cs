@@ -42,6 +42,12 @@ public class Obstacle : WorldObject
 				if(success)
 				{
 					successfulInteraction = true;
+
+					PerfectBoxDisabler pBox = perfectBox.GetComponent<PerfectBoxDisabler>();
+					if(!pBox.Disabled)
+					{
+						perfectInteraction = true;
+					}
 				}
 			}
 		}
