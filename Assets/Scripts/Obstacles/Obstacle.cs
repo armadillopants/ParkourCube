@@ -31,14 +31,15 @@ public class Obstacle : WorldObject
 		else if(useBox.IsPlayerTouching) { World.ReportNormalObstacleUse(this); }
 	}
 
-	public void TryInput(InputInfo info)
+	//public void TryInput(InputInfo info)
+	public void TryUse(Player player)
 	{
 		for(int i=0; i<priorityList.Length; ++i)
 		{
 			if(priorityList[i].IsPlayerTouching)
 			{
 				BehaviourActuator bActuator = priorityList[i].GetComponent<BehaviourActuator>();
-				bool success = bActuator.ResolveInput(info);
+				bool success = bActuator.ResolveInput(player);
 				if(success)
 				{
 					successfulInteraction = true;

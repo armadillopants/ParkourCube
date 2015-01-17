@@ -7,33 +7,33 @@ public class BehaviourActuator : MonoBehaviour
 	public InputType reads;
 	public ParkourStateType enter;
 
-	public bool ResolveInput(InputInfo info)
+	public bool ResolveInput(Player player)
 	{
-		bool result = GetRelevantInput(reads, info);
+		bool result = GetRelevantInput();
 		if(result)
 		{
-			ParkourState.CreateInstance(enter, info.Player, true);
+			ParkourState.CreateInstance(enter, player, true);
 			return true;
 		}
 		return false;
 	}
 	
-	private bool GetRelevantInput(InputType type, InputInfo info)
+	private bool GetRelevantInput()
 	{
-		switch(type)
+		switch(reads)
 		{
 			case InputType.SwipeUp:
-				return info.SwipeUp;
+				return InputMonitor.Instance.Swipe(Vector2.up);
 			case InputType.SwipeDown:
-				return info.SwipeDown;
+				return InputMonitor.Instance.Swipe(-Vector2.up);
 			case InputType.SwipeLeft:
-				return info.SwipeLeft;
+				return InputMonitor.Instance.Swipe(-Vector2.right);
 			case InputType.SwipeRight:
-				return info.SwipeRight;
+				return InputMonitor.Instance.Swipe(Vector2.right);
 			case InputType.Tap:
-				return info.Tap;
+				return InputMonitor.Instance.DidTap();
 			case InputType.Hold:
-				return info.Hold;
+				return InputMonitor.Instance.Holding();
 		}
 		return false;
 	}

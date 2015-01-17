@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
 
@@ -9,18 +10,12 @@ public class Player : MonoBehaviour
 	private Rigidbody2D rigid;
 	private LayerMask playerLayer;
 
-	public KeyWatcher spaceKey;
-	public KeyWatcher sKey;
-
 	private Obstacle obstacle;
-	private Obstacle curObstacle;
+	private GameObject obstacleRoot;
 
 	void Start()
 	{
 		rigid = rigidbody2D;
-
-		spaceKey = new KeyWatcher(KeyCode.Space);
-		sKey = new KeyWatcher(KeyCode.S);
 
 		playerLayer = ~(1 << LayerMask.NameToLayer("Player"));
 
@@ -30,15 +25,13 @@ public class Player : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		spaceKey.Update();
-		sKey.Update();
 
 		currentState.Update();
 
 		if (obstacle != null)
 		{
-			obstacle.TryInteract();
-			obstacle = null;
+			//obstacle.TryInteract();
+			obstacle.TryUse(this);
 		}
 	}
 
@@ -63,5 +56,25 @@ public class Player : MonoBehaviour
 	public void SetGravity(float gravity)
 	{
 		rigid.gravityScale = gravity;
+	}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		GameObject root = other.RootGameObject();
+		Obstacle obs = root.GetComponent<Obstacle>();
+		if(obs)
+		{
+			obstacle = obs;
+			obstacleRoot = root;
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D other)
+	{
+		if(other.gameObject == obstacleRoot)
+		{
+			obstacle = null;
+			obstacleRoot = null;
+		}
 	}
 }
