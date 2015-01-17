@@ -9,6 +9,10 @@ public class Obstacle : WorldObject
 
 	public TriggerWatcher[] priorityList;
 
+	public bool SuccessfulInteraction
+	{ get { return successfulInteraction; } }
+	private bool successfulInteraction;
+
 	public override void Update()
 	{
 		base.Update();
@@ -34,8 +38,18 @@ public class Obstacle : WorldObject
 			if(priorityList[i].IsPlayerTouching)
 			{
 				BehaviourActuator bActuator = priorityList[i].GetComponent<BehaviourActuator>();
-				bActuator.ResolveInput(info);
+				bool success = bActuator.ResolveInput(info);
+				if(success)
+				{
+					successfulInteraction = true;
+				}
 			}
 		}
+	}
+
+	public override void Reset()
+	{
+		base.Reset();
+		successfulInteraction = false;
 	}
 }

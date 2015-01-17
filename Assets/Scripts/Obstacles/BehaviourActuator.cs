@@ -7,23 +7,15 @@ public class BehaviourActuator : MonoBehaviour
 	public InputType reads;
 	public ParkourStateType enter;
 
-	private bool wasHolding;
-	public ParkourStateType onReleaseEnter;
-
-	public void ResolveInput(InputInfo info)
+	public bool ResolveInput(InputInfo info)
 	{
-		bool hold = GetRelevantInput(InputType.Hold, info);
-		if(wasHolding && !hold)
-		{
-			ParkourState.CreateInstance(onReleaseEnter, info.Player, true);
-		}
-		wasHolding = hold;
-
 		bool result = GetRelevantInput(reads, info);
 		if(result)
 		{
 			ParkourState.CreateInstance(enter, info.Player, true);
+			return true;
 		}
+		return false;
 	}
 	
 	private bool GetRelevantInput(InputType type, InputInfo info)
