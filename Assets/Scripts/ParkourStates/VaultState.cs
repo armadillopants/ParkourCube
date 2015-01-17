@@ -1,18 +1,17 @@
 ﻿using UnityEngine;
 
-public class VaultingState : ParkourState
+public class VaultState : ParkourState
 {
 	private float speedBoost = 3f;
 	private float vaultTime;
 
-	public VaultingState(Player player) : base(player) { }
+	public VaultState(Player player) : base(player) { }
 
 	public override void Enter()
 	{
 		base.Enter();
 
 		vaultTime = 0f;
-		owner.velocity = Vector2.right;
 	}
 
 	public override void Update()
@@ -23,10 +22,10 @@ public class VaultingState : ParkourState
 
 		if (vaultTime > 0.2f)
 		{
-			owner.SetState(new RunningState(owner));
+			owner.SetState(new RunState(owner));
 		}
 
-		owner.Move(owner.velocity * speedBoost);
+		owner.Move(Vector2.right * speedBoost);
 	}
 
 	public override void Exit()

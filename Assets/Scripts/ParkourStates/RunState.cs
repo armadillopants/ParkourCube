@@ -1,21 +1,21 @@
 ﻿using UnityEngine;
 
-public class RunningState : ParkourState
+public class RunState : ParkourState
 {
-	public RunningState(Player player) : base(player) { }
+	public RunState(Player player) : base(player) { }
 
 	public override void Enter()
 	{
 		base.Enter();
 
-		owner.velocity = Vector2.right;
+		owner.SetGravity(1f);
 	}
 
 	public override void Update()
 	{
 		base.Update();
 
-		owner.Move(owner.velocity);
+		owner.Move(Vector2.right);
 
 		if (TryJump()) { return; }
 		if (TrySlide()) { return; }

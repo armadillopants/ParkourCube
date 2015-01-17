@@ -1,42 +1,38 @@
 ﻿using UnityEngine;
 
-public class FallingState : ParkourState
+public class FallState : ParkourState
 {
-	private Vector2 velocity;
-	private float gravity = 6f;
-
 	private Vector3 lastPosition;
 
-	public FallingState(Player player) : base(player) { }
+	public FallState(Player player) : base(player) { }
 
 	public override void Enter()
 	{
 		base.Enter();
 
 		lastPosition = owner.transform.position;
+		owner.SetGravity(1f);
 	}
 
 	public override void Update()
 	{
 		base.Update();
 
-		owner.velocity.y -= gravity * Time.fixedDeltaTime;
-
-		RaycastHit2D hit = Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0, 0.4f, 0), owner.GetLayerMask());
+		RaycastHit2D hit = Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0, 0.6f, 0), owner.GetLayerMask());
 
 		if (hit.collider != null)
 		{
-			if (Vector2.Distance(owner.transform.position, lastPosition) > 3f)
+			if (Vector2.Distance(owner.transform.position, lastPosition) > 5f)
 			{
 				if (TryRoll()) { return; }
 				else { Debug.Log("Dead"); return; }
 			}
 
-			owner.SetState(new RunningState(owner));
+			owner.SetState(new RunState(owner));
 			return;
 		}
 
-		owner.Move(owner.velocity);
+		owner.Move(Vector2.right);
 
 		if (owner.transform.eulerAngles != Vector3.zero)
 		{

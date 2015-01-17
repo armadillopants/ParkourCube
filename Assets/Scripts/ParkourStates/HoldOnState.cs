@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class HoldingOnState : ParkourState
+public class HoldOnState : ParkourState
 {
 	private Vector2 hangPos;
 
-	public HoldingOnState(Player player) : base(player) { }
+	public HoldOnState(Player player) : base(player) { }
 
 	public override void Enter()
 	{

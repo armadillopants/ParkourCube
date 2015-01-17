@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 
-public class RollingState : ParkourState
+public class RollState : ParkourState
 {
 
 	private float rollTime;
 
-	public RollingState(Player player) : base(player) { }
+	public RollState(Player player) : base(player) { }
 
 	public override void Enter()
 	{
 		base.Enter();
 
 		rollTime = 0.3f;
-		owner.velocity = Vector2.right;
+		owner.SetGravity(1f);
 	}
 
 	public override void Update()
@@ -28,11 +28,11 @@ public class RollingState : ParkourState
 		}
 		else
 		{
-			owner.SetState(new RunningState(owner));
+			owner.SetState(new RunState(owner));
 			return;
 		}
 
-		owner.Move(owner.velocity);
+		owner.Move(Vector2.right);
 	}
 
 	public override void Exit()
