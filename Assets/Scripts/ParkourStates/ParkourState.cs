@@ -65,7 +65,7 @@ public abstract class ParkourState : State
 
 	protected JumpState GetJumpState()
 	{
-		if (owner.spaceKey.Down())
+		if (InputMonitor.Instance.Swipe(Vector2.up))
 		{
 			return new JumpState(owner);
 		}
@@ -88,7 +88,7 @@ public abstract class ParkourState : State
 
 	protected SlideState GetSlideState()
 	{
-		if (owner.sKey.Down())
+		if (InputMonitor.Instance.Swipe(-Vector2.up))
 		{
 			return new SlideState(owner);
 		}
@@ -111,7 +111,7 @@ public abstract class ParkourState : State
 
 	protected RollState GetRollState()
 	{
-		if (owner.spaceKey.Pressed())
+		if (InputMonitor.Instance.Swipe(-Vector2.up))
 		{
 			return new RollState(owner);
 		}
@@ -159,7 +159,7 @@ public abstract class ParkourState : State
 
 	protected PullUpState GetPullUpState()
 	{
-		if (owner.spaceKey.Down())
+		if (InputMonitor.Instance.DidTap())
 		{
 			return new PullUpState(owner);
 		}
