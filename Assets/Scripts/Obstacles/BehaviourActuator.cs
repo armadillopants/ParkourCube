@@ -5,14 +5,16 @@
 public class BehaviourActuator : MonoBehaviour
 {
 	public InputType reads;
-	public ParkourStateType enter;
+	public ParkourStateType onRead;
+
+	public ParkourStateType onEnter;
 
 	public bool ResolveInput(Player player)
 	{
 		bool result = GetRelevantInput();
 		if(result)
 		{
-			ParkourState.CreateInstance(enter, player, true);
+			ParkourState.CreateInstance(onRead, player, true);
 			return true;
 		}
 		return false;
@@ -36,5 +38,14 @@ public class BehaviourActuator : MonoBehaviour
 				return InputMonitor.Instance.Holding();
 		}
 		return false;
+	}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if(other.tag == "Player")
+		{
+			Player player = other.GetComponent<Player>();
+			ParkourState.CreateInstance(onEnter, player, true);
+		}
 	}
 }
