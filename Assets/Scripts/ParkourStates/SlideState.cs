@@ -13,7 +13,6 @@ public class SlideState : ParkourState
 		base.Enter();
 
 		slideTime = 0f;
-		owner.SetGravity(1f);
 	}
 
 	public override void Update()
@@ -29,7 +28,7 @@ public class SlideState : ParkourState
 			owner.SetState(new RunState(owner));
 		}
 
-		owner.Move(Vector2.right * slideSpeed);
+		owner.Move(owner.velocity * slideSpeed);
 
 		LeanTween.rotateZ(owner.gameObject, 85, 5f * Time.fixedDeltaTime);
 	}

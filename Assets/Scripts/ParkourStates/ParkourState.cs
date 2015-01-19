@@ -15,7 +15,8 @@ public enum ParkourStateType
 	Run,
 	Slide,
 	Vault,
-	Climb
+	Climb,
+	Hang
 }
 
 public abstract class ParkourState : State
@@ -33,14 +34,14 @@ public abstract class ParkourState : State
 		{ ParkourStateType.Slide, (Player p) => { return new SlideState(p); } },
 		{ ParkourStateType.Vault, (Player p) => { return new VaultState(p); } },
 		{ ParkourStateType.Climb, (Player p) => { return new ClimbState(p); } },
+		{ ParkourStateType.Hang, (Player p) => { return new HangState(p); } }
 	};
 
-	public static ParkourState CreateInstance(ParkourStateType type, Player player, bool autoApply = false)
+	public static void CreateInstance(ParkourStateType type, Player player, bool autoApply = false)
 	{
-		if(type == ParkourStateType.None) { return null; }
+		if(type == ParkourStateType.None) { return; }
 		ParkourState state = stateCreators[type](player);
 		if(autoApply) { player.SetState(state); }
-		return state;
 	}
 
 	protected Player owner;

@@ -4,6 +4,9 @@ public class FallState : ParkourState
 {
 	private Vector3 lastPosition;
 
+	private Vector2 velocity;
+	private float gravity = 6f;
+
 	public FallState(Player player) : base(player) { }
 
 	public override void Enter()
@@ -11,12 +14,13 @@ public class FallState : ParkourState
 		base.Enter();
 
 		lastPosition = owner.transform.position;
-		owner.SetGravity(1f);
 	}
 
 	public override void Update()
 	{
 		base.Update();
+
+		owner.velocity.y -= gravity * Time.fixedDeltaTime;
 
 		RaycastHit2D hit = Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0, 0.6f, 0), owner.GetLayerMask());
 
@@ -32,7 +36,7 @@ public class FallState : ParkourState
 			return;
 		}
 
-		owner.Move(Vector2.right);
+		owner.Move(owner.velocity);
 
 		if (owner.transform.eulerAngles != Vector3.zero)
 		{

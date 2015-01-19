@@ -12,7 +12,6 @@ public class RollState : ParkourState
 		base.Enter();
 
 		rollTime = 0.3f;
-		owner.SetGravity(1f);
 	}
 
 	public override void Update()
@@ -32,7 +31,7 @@ public class RollState : ParkourState
 			return;
 		}
 
-		owner.Move(Vector2.right);
+		owner.Move(owner.velocity);
 	}
 
 	public override void Exit()

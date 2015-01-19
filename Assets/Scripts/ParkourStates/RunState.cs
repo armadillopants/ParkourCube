@@ -8,17 +8,20 @@ public class RunState : ParkourState
 	{
 		base.Enter();
 
-		owner.SetGravity(1f);
+		owner.velocity = Vector2.right;
 	}
 
 	public override void Update()
 	{
 		base.Update();
 
-		owner.Move(Vector2.right);
+		owner.Move(owner.velocity);
 
-		if (TryJump()) { return; }
-		if (TrySlide()) { return; }
+		if (!owner.playerTouching)
+		{
+			if (TryJump()) { return; }
+			if (TrySlide()) { return; }
+		}
 		if (TryFall()) { return; }
 
 		if (owner.transform.eulerAngles != Vector3.zero)

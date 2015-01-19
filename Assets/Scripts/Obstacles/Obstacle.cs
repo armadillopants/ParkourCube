@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(PooledObject))]
 public class Obstacle : WorldObject
 {
 	public TriggerWatcher useBox;
@@ -17,7 +18,7 @@ public class Obstacle : WorldObject
 	{
 		base.Update();
 
-		if(useBox.IsPlayerTouching) { playerInteracted = true; }
+		//if(useBox.IsPlayerTouching) { playerInteracted = true; }
 	}
 
 	public Transform GetRandomSpawnPoint()

@@ -5,6 +5,10 @@ public class Player : MonoBehaviour
 {
 
 	public float currentSpeed;
+	public bool playerTouching;
+
+	[HideInInspector]
+	public Vector2 velocity;
 
 	private ParkourState currentState;
 	private Rigidbody2D rigid;
@@ -25,12 +29,10 @@ public class Player : MonoBehaviour
 
 	void FixedUpdate()
 	{
-
 		currentState.Update();
 
 		if (obstacle != null)
 		{
-			//obstacle.TryInteract();
 			obstacle.TryUse(this);
 		}
 	}
@@ -53,11 +55,6 @@ public class Player : MonoBehaviour
 		return playerLayer;
 	}
 
-	public void SetGravity(float gravity)
-	{
-		rigid.gravityScale = gravity;
-	}
-
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		GameObject root = other.RootGameObject();
@@ -66,6 +63,7 @@ public class Player : MonoBehaviour
 		{
 			obstacle = obs;
 			obstacleRoot = root;
+			playerTouching = true;
 		}
 	}
 
@@ -75,6 +73,7 @@ public class Player : MonoBehaviour
 		{
 			obstacle = null;
 			obstacleRoot = null;
+			playerTouching = false;
 		}
 	}
 }

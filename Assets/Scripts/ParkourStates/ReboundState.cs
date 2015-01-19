@@ -3,8 +3,8 @@
 public class ReboundState : ParkourState
 {
 
-	private Vector2 hangPos;
-	private float hangTime;
+	private float reboundTime;
+	private float jumpStrength = 6f;
 
 	public ReboundState(Player player) : base(player) { }
 
@@ -12,26 +12,26 @@ public class ReboundState : ParkourState
 	{
 		base.Enter();
 
-		hangPos = owner.transform.position;
-		hangTime = 0f;
-		owner.SetGravity(0f);
+		reboundTime = 0f;
 	}
 
 	public override void Update()
 	{
 		base.Update();
 
-		if (TryJump()) { return; }
+		reboundTime += Time.fixedDeltaTime;
 
-		hangTime += Time.fixedDeltaTime;
-
-		if (hangTime > 0.2f)
+		if (reboundTime > 0.3f)
 		{
-			owner.SetState(new FallState(owner));
+			owner.SetState(new RunState(owner));
+			return;
+		}
+		else
+		{
+			owner.velocity.y += jumpStrength * Time.fixedDeltaTime;
 		}
 
-		owner.transform.position = hangPos;
-
+		owner.Move(owner.velocity);
 	}
 
 	public override void Exit()

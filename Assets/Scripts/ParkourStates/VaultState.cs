@@ -3,6 +3,7 @@
 public class VaultState : ParkourState
 {
 	private float speedBoost = 3f;
+	private float yMod = 1.5f;
 	private float vaultTime;
 
 	public VaultState(Player player) : base(player) { }
@@ -12,6 +13,7 @@ public class VaultState : ParkourState
 		base.Enter();
 
 		vaultTime = 0f;
+		owner.velocity = Vector2.right;
 	}
 
 	public override void Update()
@@ -20,12 +22,14 @@ public class VaultState : ParkourState
 
 		vaultTime += Time.fixedDeltaTime;
 
-		if (vaultTime > 0.2f)
+		if (vaultTime > 0.3f)
 		{
 			owner.SetState(new RunState(owner));
 		}
 
-		owner.Move(Vector2.right * speedBoost);
+		owner.velocity.y += yMod * Time.fixedDeltaTime;
+
+		owner.Move(owner.velocity * speedBoost);
 	}
 
 	public override void Exit()

@@ -92,7 +92,7 @@ public class InputMonitor : MSingleton<InputMonitor>
 	{
 		if(swipeConsumed) { return false; }
 
-		if(deltaDirection.magnitude > HOLD_MAG && Vector2.Dot(deltaDirection, direction) > similarityThreshold)
+		if(deltaSum.magnitude > HOLD_MAG && Vector2.Dot(deltaDirection, direction) > similarityThreshold)
 		{
 			swipeConsumed = true;
 			return true;
