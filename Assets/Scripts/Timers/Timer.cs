@@ -15,6 +15,7 @@ public class Timer
 		this.current = 0f;
 		this.realtime = realtime;
 		this.callback = (Timer t) => { };
+		TimerManager.Instance.AddTimer(this);
 	}
 
 	public Timer(float duration, Action<Timer> callback, bool realtime = false)
@@ -23,11 +24,12 @@ public class Timer
 		this.current = 0f;
 		this.realtime = realtime;
 		this.callback = callback;
+		TimerManager.Instance.AddTimer(this);
 	}
 
 	public bool Completed
 	{
-		get { return time >= current; }
+		get { return current >= time; }
 	}
 
 	public void Update()
