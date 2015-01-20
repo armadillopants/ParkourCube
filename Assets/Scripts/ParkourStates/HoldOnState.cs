@@ -21,9 +21,9 @@ public class HoldOnState : ParkourState
 
 		owner.transform.position = hangPos;
 
-		if (owner.transform.eulerAngles != Vector3.zero)
+		if (owner.GetBody().transform.eulerAngles != Vector3.zero)
 		{
-			LeanTween.rotateZ(owner.gameObject, 0f, 5f * Time.fixedDeltaTime);
+			LeanTween.rotateZ(owner.GetBody(), 0f, 5f * Time.fixedDeltaTime);
 		}
 	}
 

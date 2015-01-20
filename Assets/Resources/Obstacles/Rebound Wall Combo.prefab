@@ -534,10 +534,9 @@ MonoBehaviour:
   perfectBox: {fileID: 11400016}
   size: 3
   priorityList:
-  - {fileID: 11400016}
-  - {fileID: 11400008}
   - {fileID: 11400012}
   - {fileID: 11400000}
+  - {fileID: 11400008}
 --- !u!114 &11454446
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -30,7 +30,7 @@ public class SlideState : ParkourState
 
 		owner.Move(owner.velocity * slideSpeed);
 
-		LeanTween.rotateZ(owner.gameObject, 85, 5f * Time.fixedDeltaTime);
+		LeanTween.rotateZ(owner.GetBody(), 85, 5f * Time.fixedDeltaTime);
 	}
 
 	public override void Exit()

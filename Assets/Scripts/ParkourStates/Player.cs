@@ -5,10 +5,14 @@ public class Player : MonoBehaviour
 {
 
 	public float currentSpeed;
-	public bool playerTouching;
 
 	[HideInInspector]
 	public Vector2 velocity;
+
+	[HideInInspector]
+	public bool playerTouching;
+
+	private GameObject body;
 
 	private ParkourState currentState;
 	private Rigidbody2D rigid;
@@ -20,6 +24,8 @@ public class Player : MonoBehaviour
 	void Start()
 	{
 		rigid = rigidbody2D;
+
+		body = GameObject.Find("Body");
 
 		playerLayer = ~(1 << LayerMask.NameToLayer("Player"));
 
@@ -75,5 +81,10 @@ public class Player : MonoBehaviour
 			obstacleRoot = null;
 			playerTouching = false;
 		}
+	}
+
+	public GameObject GetBody()
+	{
+		return body;
 	}
 }

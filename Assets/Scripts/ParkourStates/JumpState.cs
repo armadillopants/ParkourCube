@@ -50,9 +50,9 @@ public class JumpState : ParkourState
 
 		owner.Move(owner.velocity);
 
-		if (owner.transform.eulerAngles != Vector3.zero)
+		if (owner.GetBody().transform.eulerAngles != Vector3.zero)
 		{
-			LeanTween.rotateZ(owner.gameObject, 0, 5f * Time.fixedDeltaTime);
+			LeanTween.rotateZ(owner.GetBody(), 0, 5f * Time.fixedDeltaTime);
 		}
 	}
 

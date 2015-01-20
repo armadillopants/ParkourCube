@@ -23,7 +23,7 @@ public class RollState : ParkourState
 		if (rollTime > 0f)
 		{
 			owner.transform.Rotate(-Vector3.forward, 600f * Time.fixedDeltaTime);
-			LeanTween.scaleY(owner.gameObject, 0.5f, 5f * Time.fixedDeltaTime);
+			LeanTween.scaleY(owner.GetBody(), 0.5f, 5f * Time.fixedDeltaTime);
 		}
 		else
 		{
@@ -38,7 +38,7 @@ public class RollState : ParkourState
 	{
 		base.Exit();
 
-		LeanTween.scaleY(owner.gameObject, 0.7f, 5f * Time.fixedDeltaTime);
+		LeanTween.scaleY(owner.GetBody(), 0.7f, 5f * Time.fixedDeltaTime);
 		owner.transform.eulerAngles = Vector3.zero;
 	}
 }
