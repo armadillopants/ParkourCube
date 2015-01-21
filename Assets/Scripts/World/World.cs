@@ -16,18 +16,19 @@ public class World : Singleton<World>
 	private const float DISTANCE_RANGE = MAX_DISTANCE - MIN_DISTANCE;
 	private const float TERRAIN_SCORE_DIVISOR = 25f;
 
+	private Dictionary<int, int> counts;
+
+	private bool firstRoll;
 	private GameObject lastSpawned;
 	private int[] spawnQueue;
 	private int totalSpawned;
 	private Vector3 nextPiecePosition;
 
 	private int playerScore;
-
-	private Dictionary<int, int> counts;
-
 	private static GameObject playerObject;
 
-	private bool firstRoll = true;
+	private static List<GameObject> spawned;
+
 
 	public static World CreateNewWorld()
 	{
@@ -36,7 +37,8 @@ public class World : Singleton<World>
 
 		// Create new player
 		playerObject = Resources.Load("Player") as GameObject;
-		GameObject.Instantiate(playerObject, new Vector3(-9f, 0, 0), Quaternion.identity);
+		GameObject pInst = GameObject.Instantiate(playerObject, new Vector3(-9f, 0, 0), Quaternion.identity) as GameObject;
+		spawned.Add(pInst);
 
 		GameObject.FindGameObjectWithTag("MainCamera").AddComponent<CameraFollow>();
 		// Create new doom wall
@@ -46,6 +48,8 @@ public class World : Singleton<World>
 
 	public World()
 	{
+		spawned = new List<GameObject>();
+		firstRoll = true;
 		nextPiecePosition = Vector3.zero;
 		counts = new Dictionary<int, int>();
 		spawnQueue = new int[SPAWN_AHEAD];
@@ -103,12 +107,16 @@ public class World : Singleton<World>
 		lastSpawned = toSpawn;
 		Obstacle obstacle = lastSpawned.GetComponent<Obstacle>();
 
+		spawned.Add(toSpawn);
+
 		// Create the terrain below it.
 		GameObject uTerrain = WorldObject.GetTerrain();
 		uTerrain.transform.position = lastSpawned.transform.position;
 		Vector3 uTScale = uTerrain.transform.localScale;
 		uTScale.x = obstacle.size;
 		uTerrain.transform.localScale = uTScale;
+
+		spawned.Add(uTerrain);
 
 		// Create the terrain ahead of it.
 		GameObject fTerrain = WorldObject.GetTerrain();
@@ -118,16 +126,13 @@ public class World : Singleton<World>
 		fTScale.x = GetTerrainLength();
 		fTerrain.transform.localScale = fTScale;
 		nextPiecePosition = fTObj.GetTrailingPoint();
-		//nextPiecePosition.y = obstacle.GetTrailingPoint().y;
 
-		//nextPiecePosition = fTerrain.GetComponent<WorldObject>().GetTrailingPoint();
-		//nextPiecePosition.y = lastSpawned.GetComponent<WorldObject>().GetTrailingPoint().y;
+		spawned.Add(fTerrain);
 	}
 
 	private float GetTerrainLength()
 	{
 		float result = Mathf.Lerp(MIN_DISTANCE, MAX_DISTANCE, 1 - playerScore / TERRAIN_SCORE_DIVISOR);
-		//Debug.Log("Distance result: " + result);
 		return result;
 	}
 
@@ -185,5 +190,22 @@ public class World : Singleton<World>
 		GameManager.Instance.OnGameOver();
 		//player.GameOver();
 		// Display Post-Game
+	}
+
+	public static void Clear()
+	{
+		foreach(GameObject obj in spawned)
+		{
+			PooledObject pObj = obj.GetComponent<PooledObject>();
+			if(pObj)
+			{
+				pObj.ReturnToPool();
+			}
+			else
+			{
+				GameObject.Destroy(obj);
+			}
+		}
+		spawned.TrimExcess();
 	}
 }
