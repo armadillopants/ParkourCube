@@ -14,6 +14,7 @@ public class Timer
 		this.time = duration;
 		this.current = 0f;
 		this.realtime = realtime;
+		if(realtime) { this.realLastTime = Time.realtimeSinceStartup; }
 		this.callback = (Timer t) => { };
 		TimerManager.Instance.AddTimer(this);
 	}
@@ -23,6 +24,7 @@ public class Timer
 		this.time = duration;
 		this.current = 0f;
 		this.realtime = realtime;
+		if(realtime) { this.realLastTime = Time.realtimeSinceStartup; }
 		this.callback = callback;
 		TimerManager.Instance.AddTimer(this);
 	}
