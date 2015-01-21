@@ -25,12 +25,20 @@ public class World : Singleton<World>
 
 	private Dictionary<int, int> counts;
 
+	private static GameObject playerObject;
+
+	private bool firstRoll = true;
+
 	public static World CreateNewWorld()
 	{
 		if(!WorldObject.Generated) { WorldObject.Load(); }
 		instance = new World();
 
 		// Create new player
+		playerObject = Resources.Load("Player") as GameObject;
+		GameObject.Instantiate(playerObject, new Vector3(-9f, 0, 0), Quaternion.identity);
+
+		GameObject.FindGameObjectWithTag("MainCamera").AddComponent<CameraFollow>();
 		// Create new doom wall
 
 		return instance;
@@ -78,6 +86,16 @@ public class World : Singleton<World>
 		int roll = RollForNext();
 		RecordRoll(roll);
 		++totalSpawned;
+
+		if (firstRoll)
+		{
+			GameObject initialTerrain = WorldObject.GetTerrain();
+			initialTerrain.transform.position = new Vector3(-10f, 0, 0);
+			Vector3 initialScale = initialTerrain.transform.localScale;
+			initialScale.x = 10f;
+			initialTerrain.transform.localScale = initialScale;
+			firstRoll = false;
+		}
 
 		// Create the new obstacle.
 		GameObject toSpawn = WorldObject.GetObstacle(roll);
@@ -163,6 +181,8 @@ public class World : Singleton<World>
 
 	public static void GameOver()
 	{
+		Debug.Log("Game Over!");
+		GameManager.Instance.OnGameOver();
 		//player.GameOver();
 		// Display Post-Game
 	}

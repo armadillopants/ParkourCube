@@ -32,6 +32,11 @@ public class ReboundState : ParkourState
 		}
 
 		owner.Move(owner.velocity);
+
+		if (owner.GetBody().transform.eulerAngles != Vector3.zero)
+		{
+			LeanTween.rotateZ(owner.GetBody(), 0f, 5f * Time.fixedDeltaTime);
+		}
 	}
 
 	public override void Exit()

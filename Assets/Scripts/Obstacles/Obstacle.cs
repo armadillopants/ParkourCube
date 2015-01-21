@@ -3,7 +3,6 @@
 [RequireComponent(typeof(PooledObject))]
 public class Obstacle : WorldObject
 {
-	public TriggerWatcher useBox;
 	public TriggerWatcher perfectBox;
 	
 	public float size;
@@ -17,8 +16,6 @@ public class Obstacle : WorldObject
 	public override void Update()
 	{
 		base.Update();
-
-		//if(useBox.IsPlayerTouching) { playerInteracted = true; }
 	}
 
 	public Transform GetRandomSpawnPoint()
@@ -26,13 +23,6 @@ public class Obstacle : WorldObject
 		throw new System.NotImplementedException();
 	}
 
-	public void TryInteract()
-	{
-		if(perfectBox.IsPlayerTouching) { World.ReportPerfectObstacleUse(this); }
-		else if(useBox.IsPlayerTouching) { World.ReportNormalObstacleUse(this); }
-	}
-
-	//public void TryInput(InputInfo info)
 	public void TryUse(Player player)
 	{
 		for(int i=0; i<priorityList.Length; ++i)
@@ -44,11 +34,14 @@ public class Obstacle : WorldObject
 				if(success)
 				{
 					successfulInteraction = true;
+					World.ReportNormalObstacleUse(this);
 
 					PerfectBoxDisabler pBox = perfectBox.GetComponent<PerfectBoxDisabler>();
 					if(!pBox.Disabled)
 					{
 						perfectInteraction = true;
+						World.ReportPerfectObstacleUse(this);
+						Debug.Log("Perfect!");
 					}
 				}
 			}
@@ -59,5 +52,11 @@ public class Obstacle : WorldObject
 	{
 		base.Reset();
 		successfulInteraction = false;
+		perfectInteraction = false;
+	}
+
+	public bool IsPerfectInteraction()
+	{
+		return perfectInteraction;
 	}
 }

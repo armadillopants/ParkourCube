@@ -83,6 +83,11 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	public Obstacle GetObstacle()
+	{
+		return obstacle;
+	}
+
 	public GameObject GetBody()
 	{
 		return body;

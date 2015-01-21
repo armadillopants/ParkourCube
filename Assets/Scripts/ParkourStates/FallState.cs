@@ -26,7 +26,7 @@ public class FallState : ParkourState
 
 		if (hit.collider != null)
 		{
-			if (Vector2.Distance(owner.transform.position, lastPosition) > 5f)
+			if (Vector2.Distance(owner.transform.position, lastPosition) > 3f)
 			{
 				if (TryRoll()) { return; }
 				else { Debug.Log("Dead"); return; }

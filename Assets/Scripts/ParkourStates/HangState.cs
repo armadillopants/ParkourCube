@@ -22,7 +22,7 @@ public class HangState : ParkourState
 
 		hangTime += Time.fixedDeltaTime;
 
-		if (hangTime > 0.5f)
+		if (hangTime > 0.3f)
 		{
 			owner.SetState(new FallState(owner));
 		}
