@@ -25,8 +25,12 @@ public class World : Singleton<World>
 
 	private Dictionary<int, int> counts;
 
+	//static Timer t;
+	
 	public static World CreateNewWorld()
 	{
+		//t = new Timer(2f, (Timer a) => { World.GameOver(); }, true);
+		
 		if(!WorldObject.Generated) { WorldObject.Load(); }
 		instance = new World();
 
@@ -165,5 +169,11 @@ public class World : Singleton<World>
 	{
 		//player.GameOver();
 		// Display Post-Game
+		GameManager.Instance.OnGameOver();
+	}
+
+	public static void Clear()
+	{
+		//throw new System.NotImplementedException();
 	}
 }
