@@ -19,7 +19,10 @@ public class SlideState : ParkourState
 	{
 		base.Update();
 
-		if (TryJump()) { return; }
+		if (!owner.playerTouching)
+		{
+			if (TryJump()) { return; }
+		}
 
 		slideTime += Time.fixedDeltaTime;
 
