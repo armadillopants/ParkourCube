@@ -23,8 +23,7 @@ public class GameManager : MSingleton<GameManager>
 
 	public void OnQuitButton()
 	{
-		Debug.Break();
-		//Application.Quit();
+		Application.Quit();
 	}
 
 	public void OnGameOver()

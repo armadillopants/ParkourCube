@@ -12,6 +12,8 @@ public class RollState : ParkourState
 		base.Enter();
 
 		rollTime = 0.3f;
+
+		owner.velocity = Vector2.right;
 	}
 
 	public override void Update()

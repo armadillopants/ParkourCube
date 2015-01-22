@@ -29,7 +29,7 @@ public class FallState : ParkourState
 			if (Vector2.Distance(owner.transform.position, lastPosition) > 3f)
 			{
 				if (TryRoll()) { return; }
-				else { Debug.Log("Dead"); return; }
+				else { World.GameOver(); return; }
 			}
 
 			owner.SetState(new RunState(owner));

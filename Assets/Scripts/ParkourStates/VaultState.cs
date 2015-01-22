@@ -25,6 +25,7 @@ public class VaultState : ParkourState
 		if (vaultTime > 0.3f)
 		{
 			owner.SetState(new RunState(owner));
+			return;
 		}
 
 		owner.velocity.y += yMod * Time.fixedDeltaTime;

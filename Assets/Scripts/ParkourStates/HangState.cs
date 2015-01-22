@@ -14,6 +14,8 @@ public class HangState : ParkourState
 
 		hangPos = owner.transform.position;
 		hangTime = 0f;
+
+		owner.velocity = Vector2.zero;
 	}
 
 	public override void Update()
@@ -25,6 +27,7 @@ public class HangState : ParkourState
 		if (hangTime > 0.3f)
 		{
 			owner.SetState(new FallState(owner));
+			return;
 		}
 
 		owner.transform.position = hangPos;
@@ -48,19 +51,5 @@ public class HangState : ParkourState
 	public override void Exit()
 	{
 		base.Exit();
-
-		RaycastHit2D rightWallHit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.6f, 0, 0), owner.GetLayerMask());
-
-		if (rightWallHit.collider != null)
-		{
-			owner.velocity = -Vector2.right;
-		}
-
-		RaycastHit2D leftWallHit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(-0.6f, 0, 0), owner.GetLayerMask());
-
-		if (leftWallHit.collider != null)
-		{
-			owner.velocity = Vector2.right;
-		}
 	}
 }
