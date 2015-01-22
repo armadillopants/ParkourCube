@@ -338,7 +338,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoints:
   - {fileID: 400006}
-  useBox: {fileID: 11400006}
   perfectBox: {fileID: 11400000}
   size: 2
   priorityList:

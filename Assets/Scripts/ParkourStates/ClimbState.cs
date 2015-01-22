@@ -20,7 +20,7 @@ public class ClimbState : ParkourState
 
 		wallRunTime += Time.fixedDeltaTime;
 
-		if (wallRunTime > 0.5f)
+		if (wallRunTime > 0.6f)
 		{
 			owner.SetState(new RunState(owner));
 			return;
