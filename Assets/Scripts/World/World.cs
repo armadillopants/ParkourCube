@@ -28,6 +28,8 @@ public class World : Singleton<World>
 
 	private static List<GameObject> spawned;
 
+	public static GameObject player;
+
 	public static World CreateNewWorld()
 	{
 		if(!WorldObject.Generated) { WorldObject.Load(); }
@@ -36,6 +38,7 @@ public class World : Singleton<World>
 		// Create new player
 		GameObject playerObject = Resources.Load("Player") as GameObject;
 		GameObject pInst = GameObject.Instantiate(playerObject, new Vector3(-9f, 0, 0), Quaternion.identity) as GameObject;
+		player = pInst;
 		spawned.Add(pInst);
 
 		// Create new doom wall

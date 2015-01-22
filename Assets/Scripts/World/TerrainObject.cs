@@ -2,19 +2,22 @@
 
 public class TerrainObject : WorldObject
 {
-	private bool wasVisible;
+	private const float DELETE_LEFT_DIST = 20f;
+	//private bool wasVisible;
 
 	public override void Update()
 	{
 		base.Update();
 
-		if(!wasVisible && myRenderer.isVisible) { wasVisible = true; }
-		if(wasVisible && !myRenderer.isVisible) { deletionFlag = true; }
+		if(transform.position.x < World.player.transform.position.x - DELETE_LEFT_DIST) { deletionFlag = true; }
+
+		//if(!wasVisible && myRenderer.isVisible) { wasVisible = true; }
+		//if(wasVisible && !myRenderer.isVisible) { deletionFlag = true; }
 	}
 
 	public override void Reset()
 	{
 		base.Reset();
-		wasVisible = false;
+		//wasVisible = false;
 	}
 }
