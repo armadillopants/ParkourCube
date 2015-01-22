@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 	[HideInInspector]
 	public bool playerTouching;
 
+	[SerializeField]
 	private GameObject body;
 
 	private ParkourState currentState;
@@ -24,8 +25,6 @@ public class Player : MonoBehaviour
 	void Start()
 	{
 		rigid = rigidbody2D;
-
-		body = GameObject.Find("Body");
 
 		playerLayer = ~(1 << LayerMask.NameToLayer("Player"));
 

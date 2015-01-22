@@ -205,8 +205,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1500001, y: 2.0999999, z: 0}
-  m_LocalScale: {x: .200000003, y: .200000003, z: 1}
+  m_LocalPosition: {x: 2.1500001, y: 2.04999995, z: 0}
+  m_LocalScale: {x: .200000003, y: .100000001, z: 1}
   m_Children: []
   m_Father: {fileID: 450182}
   m_RootOrder: 4
@@ -230,7 +230,7 @@ Transform:
   m_GameObject: {fileID: 128082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: .850000024, y: 3.5, z: 0}
-  m_LocalScale: {x: .200000003, y: .200000003, z: 1}
+  m_LocalScale: {x: .200000003, y: .100000001, z: 1}
   m_Children: []
   m_Father: {fileID: 450182}
   m_RootOrder: 5
@@ -583,7 +583,6 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 428084}
   - {fileID: 428086}
-  useBox: {fileID: 0}
   perfectBox: {fileID: 11400016}
   size: 3
   priorityList:

@@ -25,10 +25,8 @@ public class World : Singleton<World>
 	private Vector3 nextPiecePosition;
 
 	private int playerScore;
-	private static GameObject playerObject;
 
 	private static List<GameObject> spawned;
-
 
 	public static World CreateNewWorld()
 	{
@@ -36,11 +34,10 @@ public class World : Singleton<World>
 		instance = new World();
 
 		// Create new player
-		playerObject = Resources.Load("Player") as GameObject;
+		GameObject playerObject = Resources.Load("Player") as GameObject;
 		GameObject pInst = GameObject.Instantiate(playerObject, new Vector3(-9f, 0, 0), Quaternion.identity) as GameObject;
 		spawned.Add(pInst);
 
-		GameObject.FindGameObjectWithTag("MainCamera").AddComponent<CameraFollow>();
 		// Create new doom wall
 
 		return instance;
@@ -132,7 +129,7 @@ public class World : Singleton<World>
 
 	private float GetTerrainLength()
 	{
-		float result = Mathf.Lerp(MIN_DISTANCE, MAX_DISTANCE, 1 - playerScore / TERRAIN_SCORE_DIVISOR);
+		float result = Mathf.Lerp(MIN_DISTANCE, MAX_DISTANCE, 1 - Mathf.Clamp(playerScore, 0, TERRAIN_SCORE_DIVISOR) / TERRAIN_SCORE_DIVISOR);
 		return result;
 	}
 
@@ -172,6 +169,7 @@ public class World : Singleton<World>
 
 	public static void ReportNormalObstacleUse(Obstacle obstacle)
 	{
+		Debug.Log("Normal");
 		instance.playerScore++;
 		instance.BuildNext();
 		obstacle.FlagForDeletion();
@@ -179,6 +177,7 @@ public class World : Singleton<World>
 
 	public static void ReportPerfectObstacleUse(Obstacle obstacle)
 	{
+		Debug.Log("Perfect");
 		instance.playerScore += 2;
 		instance.BuildNext();
 		obstacle.FlagForDeletion();
@@ -188,8 +187,6 @@ public class World : Singleton<World>
 	{
 		Debug.Log("Game Over!");
 		GameManager.Instance.OnGameOver();
-		//player.GameOver();
-		// Display Post-Game
 	}
 
 	public static void Clear()

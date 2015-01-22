@@ -41,7 +41,6 @@ public class Obstacle : WorldObject
 					{
 						perfectInteraction = true;
 						World.ReportPerfectObstacleUse(this);
-						Debug.Log("Perfect!");
 					}
 				}
 			}
