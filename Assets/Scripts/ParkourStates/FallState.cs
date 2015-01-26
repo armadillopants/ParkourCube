@@ -2,9 +2,6 @@
 
 public class FallState : ParkourState
 {
-	private Vector3 lastPosition;
-
-	private Vector2 velocity;
 	private float gravity = 6f;
 
 	public FallState(Player player) : base(player) { }
@@ -12,8 +9,6 @@ public class FallState : ParkourState
 	public override void Enter()
 	{
 		base.Enter();
-
-		lastPosition = owner.transform.position;
 	}
 
 	public override void Update()
@@ -26,12 +21,6 @@ public class FallState : ParkourState
 
 		if (hit.collider != null)
 		{
-			/*if (Vector2.Distance(owner.transform.position, lastPosition) > 3f)
-			{
-				if (owner.canMove && TryRoll()) { return; }
-				else { World.GameOver(); owner.canMove = false; return; }
-			}*/
-
 			owner.SetState(new RunState(owner));
 			return;
 		}
