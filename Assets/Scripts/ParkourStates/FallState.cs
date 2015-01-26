@@ -26,11 +26,11 @@ public class FallState : ParkourState
 
 		if (hit.collider != null)
 		{
-			if (Vector2.Distance(owner.transform.position, lastPosition) > 3f)
+			/*if (Vector2.Distance(owner.transform.position, lastPosition) > 3f)
 			{
 				if (owner.canMove && TryRoll()) { return; }
 				else { World.GameOver(); owner.canMove = false; return; }
-			}
+			}*/
 
 			owner.SetState(new RunState(owner));
 			return;

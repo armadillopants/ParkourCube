@@ -7,6 +7,8 @@ public class Obstacle : WorldObject
 	
 	public float size;
 
+	public Transform startingPoint;
+
 	public TriggerWatcher[] priorityList;
 
 	public bool SuccessfulInteraction

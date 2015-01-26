@@ -6,12 +6,25 @@ public class GameManager : MSingleton<GameManager>
 	public Canvas menu;
 	public Canvas score;
 	public Canvas postGame;
+	public Canvas pause;
+
+	private bool isPaused;
 
 	void Start()
 	{
 		menu.enabled = true;
 		score.enabled = false;
 		postGame.enabled = false;
+		pause.enabled = false;
+	}
+
+	void Update()
+	{
+		// Temp
+		if (Input.GetKeyDown(KeyCode.Escape) && !isPaused)
+		{
+			OnPause();
+		}
 	}
 
 	public void OnPlayButton()
@@ -19,6 +32,20 @@ public class GameManager : MSingleton<GameManager>
 		menu.enabled = false;
 		score.enabled = true;
 		World.CreateNewWorld();
+	}
+
+	void OnPause()
+	{
+		Time.timeScale = 0f;
+		pause.enabled = true;
+		isPaused = true;
+	}
+
+	public void OnResume()
+	{
+		Time.timeScale = 1f;
+		pause.enabled = false;
+		isPaused = false;
 	}
 
 	public void OnQuitButton()

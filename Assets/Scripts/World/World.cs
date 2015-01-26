@@ -11,7 +11,7 @@ public class World : Singleton<World>
 	public const int WATCH_TIME = 3;
 	private const float REPEAT_MOD =  0.6f;
 
-	private const float MIN_DISTANCE = 2f;
+	private const float MIN_DISTANCE = 5f;
 	private const float MAX_DISTANCE = 10f;
 	private const float DISTANCE_RANGE = MAX_DISTANCE - MIN_DISTANCE;
 	private const float TERRAIN_SCORE_DIVISOR = 25f;
@@ -111,7 +111,14 @@ public class World : Singleton<World>
 
 		// Create the terrain below it.
 		GameObject uTerrain = WorldObject.GetTerrain();
-		uTerrain.transform.position = lastSpawned.transform.position;
+		if (obstacle.startingPoint != null)
+		{
+			uTerrain.transform.position = obstacle.startingPoint.position;
+		}
+		else
+		{
+			uTerrain.transform.position = lastSpawned.transform.position;
+		}
 		Vector3 uTScale = uTerrain.transform.localScale;
 		uTScale.x = obstacle.size;
 		uTerrain.transform.localScale = uTScale;
