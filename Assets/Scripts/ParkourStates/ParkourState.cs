@@ -51,52 +51,6 @@ public abstract class ParkourState : State
 		owner = player;
 	}
 
-	protected bool TryJump()
-	{
-		JumpState state = GetJumpState();
-
-		if (state != null)
-		{
-			owner.SetState(state);
-			return true;
-		}
-
-		return false;
-	}
-
-	protected JumpState GetJumpState()
-	{
-		if (InputMonitor.Instance.Swipe(Vector2.up))
-		{
-			return new JumpState(owner);
-		}
-
-		return null;
-	}
-
-	protected bool TrySlide()
-	{
-		SlideState state = GetSlideState();
-
-		if (state != null)
-		{
-			owner.SetState(state);
-			return true;
-		}
-
-		return false;
-	}
-
-	protected SlideState GetSlideState()
-	{
-		if (InputMonitor.Instance.Swipe(-Vector2.up))
-		{
-			return new SlideState(owner);
-		}
-
-		return null;
-	}
-
 	protected bool TryRoll()
 	{
 		RollState state = GetRollState();

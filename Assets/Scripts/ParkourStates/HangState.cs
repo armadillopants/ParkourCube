@@ -16,6 +16,20 @@ public class HangState : ParkourState
 		hangTime = 0f;
 
 		owner.velocity = Vector2.zero;
+
+		RaycastHit2D rightWallHit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.6f, 0, 0), owner.GetLayerMask());
+
+		if (rightWallHit.collider != null)
+		{
+			LeanTween.rotateZ(owner.GetBody(), 45, 5f * Time.fixedDeltaTime);
+		}
+
+		RaycastHit2D leftWallHit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(-0.6f, 0, 0), owner.GetLayerMask());
+
+		if (leftWallHit.collider != null)
+		{
+			LeanTween.rotateZ(owner.GetBody(), -45, 5f * Time.fixedDeltaTime);
+		}
 	}
 
 	public override void Update()
@@ -31,20 +45,6 @@ public class HangState : ParkourState
 		}
 
 		owner.transform.position = hangPos;
-
-		RaycastHit2D rightWallHit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.6f, 0, 0), owner.GetLayerMask());
-
-		if (rightWallHit.collider != null)
-		{
-			LeanTween.rotateZ(owner.GetBody(), 45, 5f * Time.fixedDeltaTime);
-		}
-
-		RaycastHit2D leftWallHit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(-0.6f, 0, 0), owner.GetLayerMask());
-
-		if (leftWallHit.collider != null)
-		{
-			LeanTween.rotateZ(owner.GetBody(), -45, 5f * Time.fixedDeltaTime);
-		}
 
 	}
 

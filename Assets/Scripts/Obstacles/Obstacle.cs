@@ -10,7 +10,10 @@ public class Obstacle : WorldObject
 	public TriggerWatcher[] priorityList;
 
 	public bool SuccessfulInteraction
-	{ get { return successfulInteraction; } }
+	{
+		get { return successfulInteraction; }
+		set { successfulInteraction = value; }
+	}
 	private bool successfulInteraction;
 
 	public override void Update()
@@ -34,13 +37,16 @@ public class Obstacle : WorldObject
 				if(success)
 				{
 					successfulInteraction = true;
-					World.ReportNormalObstacleUse(this);
 
 					PerfectBoxDisabler pBox = perfectBox.GetComponent<PerfectBoxDisabler>();
 					if(!pBox.Disabled)
 					{
 						perfectInteraction = true;
 						World.ReportPerfectObstacleUse(this);
+					}
+					else
+					{
+						World.ReportNormalObstacleUse(this);
 					}
 				}
 			}

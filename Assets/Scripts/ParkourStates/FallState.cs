@@ -28,8 +28,8 @@ public class FallState : ParkourState
 		{
 			if (Vector2.Distance(owner.transform.position, lastPosition) > 3f)
 			{
-				if (TryRoll()) { return; }
-				else { World.GameOver(); return; }
+				if (owner.canMove && TryRoll()) { return; }
+				else { World.GameOver(); owner.canMove = false; return; }
 			}
 
 			owner.SetState(new RunState(owner));

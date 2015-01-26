@@ -26,7 +26,7 @@ public class ClimbState : ParkourState
 			return;
 		}
 
-		owner.Move(owner.velocity);
+		owner.Move(owner.velocity + Vector2.right);
 
 		RaycastHit2D rightWallHit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.6f, 0f, 0), owner.GetLayerMask());
 

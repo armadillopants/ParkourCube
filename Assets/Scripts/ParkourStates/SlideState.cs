@@ -3,7 +3,6 @@
 public class SlideState : ParkourState
 {
 	private float slideTime;
-	private float maxSlideTime = 0.3f;
 	private float slideSpeed = 3f;
 
 	public SlideState(Player player) : base(player) { }
@@ -13,20 +12,17 @@ public class SlideState : ParkourState
 		base.Enter();
 
 		slideTime = 0f;
+
+		owner.velocity = Vector2.right;
 	}
 
 	public override void Update()
 	{
 		base.Update();
 
-		if (!owner.playerTouching)
-		{
-			if (TryJump()) { return; }
-		}
-
 		slideTime += Time.fixedDeltaTime;
 
-		if (slideTime > maxSlideTime)
+		if (slideTime > 0.3f)
 		{
 			owner.SetState(new RunState(owner));
 		}

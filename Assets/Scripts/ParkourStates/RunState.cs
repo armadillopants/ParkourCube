@@ -9,6 +9,7 @@ public class RunState : ParkourState
 		base.Enter();
 
 		owner.velocity = Vector2.right;
+		LeanTween.scaleY(owner.GetBody(), 1f, 5f * Time.fixedDeltaTime);
 	}
 
 	public override void Update()
@@ -17,11 +18,6 @@ public class RunState : ParkourState
 
 		owner.Move(owner.velocity);
 
-		if (!owner.playerTouching)
-		{
-			if (TryJump()) { return; }
-			if (TrySlide()) { return; }
-		}
 		if (TryFall()) { return; }
 
 		if (owner.GetBody().transform.eulerAngles != Vector3.zero)

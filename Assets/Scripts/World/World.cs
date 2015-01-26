@@ -174,6 +174,7 @@ public class World : Singleton<World>
 	{
 		Debug.Log("Normal");
 		instance.playerScore++;
+		GameManager.Instance.UpdateScore(instance.playerScore);
 		instance.BuildNext();
 		obstacle.FlagForDeletion();
 	}
@@ -182,6 +183,7 @@ public class World : Singleton<World>
 	{
 		Debug.Log("Perfect");
 		instance.playerScore += 2;
+		GameManager.Instance.UpdateScore(instance.playerScore);
 		instance.BuildNext();
 		obstacle.FlagForDeletion();
 	}
@@ -190,6 +192,7 @@ public class World : Singleton<World>
 	{
 		Debug.Log("Game Over!");
 		GameManager.Instance.OnGameOver();
+		GameManager.Instance.DisplayFinalScore(instance.playerScore);
 	}
 
 	public static void Clear()

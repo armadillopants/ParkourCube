@@ -14,6 +14,8 @@ public class VaultState : ParkourState
 
 		vaultTime = 0f;
 		owner.velocity = Vector2.right;
+
+		LeanTween.rotateZ(owner.GetBody(), -45, 5f * Time.fixedDeltaTime);
 	}
 
 	public override void Update()

@@ -45,6 +45,7 @@ public class BehaviourActuator : MonoBehaviour
 		if(other.tag == "Player")
 		{
 			Player player = other.GetComponent<Player>();
+			player.GetObstacle().SuccessfulInteraction = false;
 			ParkourState.CreateInstance(onEnter, player, true);
 		}
 	}

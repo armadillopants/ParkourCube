@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
 	[HideInInspector]
 	public bool playerTouching;
 
+	[HideInInspector]
+	public bool canMove = true;
+
 	[SerializeField]
 	private GameObject body;
 
@@ -20,6 +23,7 @@ public class Player : MonoBehaviour
 	private LayerMask playerLayer;
 
 	private Obstacle obstacle;
+	private Obstacle lastObstacle;
 	private GameObject obstacleRoot;
 
 	void Start()
@@ -30,6 +34,8 @@ public class Player : MonoBehaviour
 
 		currentState = new RunState(this);
 		currentState.Enter();
+
+		lastObstacle = null;
 	}
 
 	void FixedUpdate()
@@ -52,7 +58,10 @@ public class Player : MonoBehaviour
 
 	public void Move(Vector2 direction)
 	{
-		rigid.position += direction * currentSpeed * Time.fixedDeltaTime;
+		if (canMove)
+		{
+			rigid.position += direction * currentSpeed * Time.fixedDeltaTime;
+		}
 	}
 
 	public LayerMask GetLayerMask()
@@ -67,6 +76,7 @@ public class Player : MonoBehaviour
 		if(obs)
 		{
 			obstacle = obs;
+			lastObstacle = obstacle;
 			obstacleRoot = root;
 			playerTouching = true;
 		}
@@ -84,7 +94,7 @@ public class Player : MonoBehaviour
 
 	public Obstacle GetObstacle()
 	{
-		return obstacle;
+		return lastObstacle;
 	}
 
 	public GameObject GetBody()

@@ -9,6 +9,7 @@ public class KillBox : MonoBehaviour
 	{
 		if(other.tag == "Player" && !obstacle.SuccessfulInteraction)
 		{
+			other.GetComponent<Player>().canMove = false;
 			World.GameOver();
 		}
 	}
