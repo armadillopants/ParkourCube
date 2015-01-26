@@ -37,10 +37,11 @@ public class ObjectPool
 
 	public void Return(PooledObject obj)
 	{
-		obj.gameObject.SetActive(false);
 		var scripts = obj.GetComponentsInChildren<MonoBehaviour>().Where(x => x is IPoolable);
+		obj.gameObject.SetActive(false);
 		foreach(MonoBehaviour script in scripts)
 		{
+			Debug.Log("Resetting");
 			((IPoolable)script).Reset();
 		}
 		pool.Push(obj.gameObject);
