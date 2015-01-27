@@ -180,6 +180,7 @@ public class World : Singleton<World>
 		instance.BuildNext();
 		obstacle.FlagForDeletion();
 		doomWall.PushBack();
+		//doomWall.PushBack();
 	}
 
 	public static void GameOver()
@@ -187,6 +188,7 @@ public class World : Singleton<World>
 		//Application.LoadLevel(0);
 		GameManager.Instance.OnGameOver();
 		GameManager.Instance.DisplayFinalScore(instance.playerScore);
+		doomWall.canMove = false;
 	}
 
 	public static void Clear()

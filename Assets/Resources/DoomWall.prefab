@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ff50d85f0e96e4290f53be5d1b7b7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creepSpeed: .0500000007
+  creepSpeed: .100000001
   pushback: 1
   creepScoreModifier: 75
   maxModifier: .5
