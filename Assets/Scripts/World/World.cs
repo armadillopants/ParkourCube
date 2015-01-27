@@ -30,6 +30,8 @@ public class World : Singleton<World>
 
 	public static GameObject player;
 
+	public static DoomWall doomWall;
+
 	public static World CreateNewWorld()
 	{
 		//if(!WorldObject.Generated) { WorldObject.Load(); }
@@ -40,6 +42,16 @@ public class World : Singleton<World>
 		GameObject pInst = GameObject.Instantiate(playerObject, new Vector3(-9f, 0, 0), Quaternion.identity) as GameObject;
 		player = pInst;
 		spawned.Add(pInst);
+
+		GameObject dWall = Resources.Load("DoomWall") as GameObject;
+		if(!dWall)
+		{
+			Debug.LogError("Move the DoomWall prefab to Resources folder, Matt.");
+			Debug.Break();
+		}
+		GameObject dInst = GameObject.Instantiate(dWall, new Vector3(-10000f, 0f, 0f), Quaternion.identity) as GameObject;
+		doomWall = dInst.GetComponent<DoomWall>();
+		spawned.Add(dInst);
 
 		// Create new doom wall
 
@@ -184,6 +196,7 @@ public class World : Singleton<World>
 		GameManager.Instance.UpdateScore(instance.playerScore);
 		instance.BuildNext();
 		obstacle.FlagForDeletion();
+		doomWall.PushBack();
 	}
 
 	public static void ReportPerfectObstacleUse(Obstacle obstacle)
@@ -193,6 +206,8 @@ public class World : Singleton<World>
 		GameManager.Instance.UpdateScore(instance.playerScore);
 		instance.BuildNext();
 		obstacle.FlagForDeletion();
+		doomWall.PushBack();
+		doomWall.PushBack();
 	}
 
 	public static void GameOver()
