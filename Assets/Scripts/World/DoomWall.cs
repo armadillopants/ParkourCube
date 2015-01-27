@@ -22,7 +22,7 @@ public class DoomWall : MonoBehaviour
 		float val = 1f + Mathf.Clamp(World.Instance.playerScore / creepScoreModifier, 0f, maxModifier);
 		offset += creepSpeed * val * Time.deltaTime;
 
-		Vector3 newPosition = cam.ViewportToWorldPoint(new Vector3(0f, 0.5f, 0));
+		Vector3 newPosition = cam.ViewportToWorldPoint(new Vector3(offset, 0.5f, 0));
 		newPosition.z = transform.position.z;
 		newPosition.x += offset;
 		transform.position = newPosition;

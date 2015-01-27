@@ -180,7 +180,6 @@ public class World : Singleton<World>
 		instance.BuildNext();
 		obstacle.FlagForDeletion();
 		doomWall.PushBack();
-		doomWall.PushBack();
 	}
 
 	public static void GameOver()

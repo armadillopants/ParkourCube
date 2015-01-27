@@ -46,8 +46,7 @@ public class Obstacle : WorldObject
 					if(!pBox.Disabled)
 					{
 						perfectInteraction = true;
-						//World.ReportPerfectObstacleUse(this);
-						World.ReportNormalObstacleUse(this);
+						World.ReportPerfectObstacleUse(this);
 					}
 					else
 					{
