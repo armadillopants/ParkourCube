@@ -32,7 +32,7 @@ public class Obstacle : WorldObject
 	{
 		for(int i=0; i<priorityList.Length; ++i)
 		{
-			if(priorityList[i].IsPlayerTouching)
+			if(!GameManager.Instance.GameOver && priorityList[i].IsPlayerTouching)
 			{
 				BehaviourActuator bActuator = priorityList[i].GetComponent<BehaviourActuator>();
 				bool success = bActuator.ResolveInput(player);

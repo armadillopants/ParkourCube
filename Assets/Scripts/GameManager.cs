@@ -9,7 +9,11 @@ public class GameManager : MSingleton<GameManager>
 	public GameObject pause;
 	public GameObject pauseButton;
 
-	private bool isPaused;
+	public bool GameOver
+	{
+		get { return gameOver; }
+	}
+	private bool gameOver;
 
 	void Start()
 	{
@@ -24,6 +28,7 @@ public class GameManager : MSingleton<GameManager>
 	{
 		menu.SetActive(false);
 		score.SetActive(true);
+		pauseButton.SetActive(true);
 		World.CreateNewWorld();
 	}
 
@@ -48,6 +53,7 @@ public class GameManager : MSingleton<GameManager>
 
 	public void OnGameOver()
 	{
+		gameOver = true;
 		score.SetActive(false);
 		pauseButton.SetActive(false);
 		postGame.SetActive(true);
@@ -55,6 +61,7 @@ public class GameManager : MSingleton<GameManager>
 
 	public void OnGameOverRestart()
 	{
+		gameOver = false;
 		score.SetActive(true);
 		pauseButton.SetActive(true);
 		postGame.SetActive(false);
@@ -65,7 +72,9 @@ public class GameManager : MSingleton<GameManager>
 
 	public void OnGameOverBack()
 	{
+		gameOver = false;
 		postGame.SetActive(false);
+		pause.SetActive(false);
 		pauseButton.SetActive(false);
 		menu.SetActive(true);
 		ResetScore();
