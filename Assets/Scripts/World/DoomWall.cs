@@ -37,6 +37,7 @@ public class DoomWall : MonoBehaviour
 	{
 		if(other.tag == "Player")
 		{
+			other.GetComponent<Player>().canMove = true;
 			World.GameOver();
 		}
 	}

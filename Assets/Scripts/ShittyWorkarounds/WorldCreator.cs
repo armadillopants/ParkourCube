@@ -4,6 +4,7 @@ public class WorldCreator : MonoBehaviour
 {
 	void Start()
 	{
+		WorldObject.Load();
 		World.CreateNewWorld();
 		Destroy(gameObject);
 	}

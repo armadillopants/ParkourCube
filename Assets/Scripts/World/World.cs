@@ -34,7 +34,7 @@ public class World : Singleton<World>
 
 	public static World CreateNewWorld()
 	{
-		//if(!WorldObject.Generated) { WorldObject.Load(); }
+		if(!WorldObject.Generated) { WorldObject.Load(); }
 		instance = new World();
 
 		// Create new player

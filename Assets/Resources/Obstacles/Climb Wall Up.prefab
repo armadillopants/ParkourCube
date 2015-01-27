@@ -151,23 +151,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &190202
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 490202}
-  - 61: {fileID: 6190206}
-  - 114: {fileID: 11490204}
-  m_Layer: 0
-  m_Name: Kill Box
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &190204
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +212,7 @@ Transform:
   - {fileID: 490186}
   - {fileID: 490188}
   m_Father: {fileID: 490190}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!4 &490186
 Transform:
   m_ObjectHideFlags: 1
@@ -269,7 +252,6 @@ Transform:
   - {fileID: 490196}
   - {fileID: 490198}
   - {fileID: 490200}
-  - {fileID: 490202}
   - {fileID: 490184}
   - {fileID: 490204}
   m_Father: {fileID: 0}
@@ -334,18 +316,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 490190}
   m_RootOrder: 4
---- !u!4 &490202
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 190202}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.07500005, y: 1.20000005, z: 0}
-  m_LocalScale: {x: .100000001, y: 2, z: 1}
-  m_Children: []
-  m_Father: {fileID: 490190}
-  m_RootOrder: 5
 --- !u!4 &490204
 Transform:
   m_ObjectHideFlags: 1
@@ -359,7 +329,7 @@ Transform:
   - {fileID: 490206}
   - {fileID: 490208}
   m_Father: {fileID: 490190}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!4 &490206
 Transform:
   m_ObjectHideFlags: 1
@@ -520,17 +490,6 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_Size: {x: 1, y: 1}
   m_Center: {x: 0, y: 0}
---- !u!61 &6190206
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 190202}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
 --- !u!61 &6190208
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -635,18 +594,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTime: .100000001
---- !u!114 &11490204
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 190202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daa942c1d6bf30e489b2fba7537f2fe6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacle: {fileID: 11490190}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

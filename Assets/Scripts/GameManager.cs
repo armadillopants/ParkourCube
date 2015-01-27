@@ -80,7 +80,7 @@ public class GameManager : MSingleton<GameManager>
 		pause.SetActive(false);
 		pauseButton.SetActive(false);
 		menu.SetActive(true);
-		ResetScore();
+		//ResetScore();
 		//World.Clear();
 		Application.LoadLevel(0);
 	}

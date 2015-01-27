@@ -96,23 +96,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &180456
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 480456}
-  - 61: {fileID: 6180448}
-  - 114: {fileID: 11480452}
-  m_Layer: 0
-  m_Name: Kill Box
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &180458
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +266,7 @@ Transform:
   - {fileID: 480446}
   - {fileID: 480448}
   m_Father: {fileID: 480474}
-  m_RootOrder: 10
+  m_RootOrder: 9
 --- !u!4 &480446
 Transform:
   m_ObjectHideFlags: 1
@@ -344,18 +327,6 @@ Transform:
   m_Children:
   - {fileID: 480452}
   - {fileID: 480450}
-  m_Father: {fileID: 480474}
-  m_RootOrder: 9
---- !u!4 &480456
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 180456}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.20000005, y: .5, z: 0}
-  m_LocalScale: {x: .100000001, y: 1, z: 1}
-  m_Children: []
   m_Father: {fileID: 480474}
   m_RootOrder: 8
 --- !u!4 &480458
@@ -472,7 +443,6 @@ Transform:
   - {fileID: 480462}
   - {fileID: 480460}
   - {fileID: 480458}
-  - {fileID: 480456}
   - {fileID: 480454}
   - {fileID: 480444}
   m_Father: {fileID: 0}
@@ -607,17 +577,6 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_Size: {x: 1, y: 1}
   m_Center: {x: 0, y: 0}
---- !u!61 &6180448
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 180456}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
 --- !u!61 &6180450
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -695,18 +654,6 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_Size: {x: 3, y: 5}
   m_Center: {x: 1.5, y: 2.5}
---- !u!114 &11480452
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 180456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daa942c1d6bf30e489b2fba7537f2fe6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacle: {fileID: 11480474}
 --- !u!114 &11480454
 MonoBehaviour:
   m_ObjectHideFlags: 1

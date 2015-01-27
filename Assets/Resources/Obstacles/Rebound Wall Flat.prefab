@@ -157,23 +157,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &146158
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 446158}
-  - 61: {fileID: 6146166}
-  - 114: {fileID: 11446162}
-  m_Layer: 0
-  m_Name: Kill Box
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &146160
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +271,6 @@ Transform:
   - {fileID: 446152}
   - {fileID: 446154}
   - {fileID: 446156}
-  - {fileID: 446158}
   - {fileID: 446160}
   - {fileID: 446170}
   m_Father: {fileID: 0}
@@ -389,18 +371,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 446140}
   m_RootOrder: 7
---- !u!4 &446158
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146158}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.20000005, y: .5, z: 0}
-  m_LocalScale: {x: .100000001, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 446140}
-  m_RootOrder: 8
 --- !u!4 &446160
 Transform:
   m_ObjectHideFlags: 1
@@ -414,7 +384,7 @@ Transform:
   - {fileID: 446162}
   - {fileID: 446164}
   m_Father: {fileID: 446140}
-  m_RootOrder: 9
+  m_RootOrder: 8
 --- !u!4 &446162
 Transform:
   m_ObjectHideFlags: 1
@@ -476,7 +446,7 @@ Transform:
   - {fileID: 446168}
   - {fileID: 446166}
   m_Father: {fileID: 446140}
-  m_RootOrder: 10
+  m_RootOrder: 9
 --- !u!23 &2346164
 Renderer:
   m_ObjectHideFlags: 1
@@ -662,17 +632,6 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_Size: {x: 1, y: 1}
   m_Center: {x: 0, y: 0}
---- !u!61 &6146166
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146158}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
 --- !u!61 &6146168
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -840,18 +799,6 @@ MonoBehaviour:
   reads: 0
   onRead: 4
   onEnter: 0
---- !u!114 &11446162
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146158}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daa942c1d6bf30e489b2fba7537f2fe6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacle: {fileID: 11446140}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
