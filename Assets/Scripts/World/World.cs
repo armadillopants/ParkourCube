@@ -32,7 +32,7 @@ public class World : Singleton<World>
 
 	public static World CreateNewWorld()
 	{
-		if(!WorldObject.Generated) { WorldObject.Load(); }
+		//if(!WorldObject.Generated) { WorldObject.Load(); }
 		instance = new World();
 
 		// Create new player
@@ -197,7 +197,7 @@ public class World : Singleton<World>
 
 	public static void GameOver()
 	{
-		Debug.Log("Game Over!");
+		//Application.LoadLevel(0);
 		GameManager.Instance.OnGameOver();
 		GameManager.Instance.DisplayFinalScore(instance.playerScore);
 	}

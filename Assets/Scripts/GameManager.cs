@@ -17,6 +17,7 @@ public class GameManager : MSingleton<GameManager>
 
 	void Start()
 	{
+		DontDestroyOnLoad(this);
 		menu.SetActive(true);
 		score.SetActive(false);
 		postGame.SetActive(false);
@@ -28,6 +29,7 @@ public class GameManager : MSingleton<GameManager>
 	{
 		menu.SetActive(false);
 		score.SetActive(true);
+		Application.LoadLevel(1);
 		pauseButton.SetActive(true);
 		World.CreateNewWorld();
 	}
@@ -66,8 +68,9 @@ public class GameManager : MSingleton<GameManager>
 		pauseButton.SetActive(true);
 		postGame.SetActive(false);
 		ResetScore();
-		World.Clear();
-		World.CreateNewWorld();
+		OnPlayButton();
+		//World.Clear();
+		//World.CreateNewWorld();
 	}
 
 	public void OnGameOverBack()
@@ -78,7 +81,8 @@ public class GameManager : MSingleton<GameManager>
 		pauseButton.SetActive(false);
 		menu.SetActive(true);
 		ResetScore();
-		World.Clear();
+		//World.Clear();
+		Application.LoadLevel(0);
 	}
 
 	public void UpdateScore(int playerScore)
