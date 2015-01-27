@@ -27,6 +27,8 @@ public class WorldObject : MonoBehaviour, IPoolable
 	public static int NumObstacles
 	{ get { return totalObstacles; } }
 
+	private const float DELETE_LEFT_DIST = 20f;
+
 	public static void Load()
 	{
 		GameObject[] objects = Resources.LoadAll<GameObject>("Obstacles/");
@@ -85,7 +87,7 @@ public class WorldObject : MonoBehaviour, IPoolable
 
 	public virtual void Update()
 	{
-		if(deletionFlag && !myRenderer.isVisible)
+		if ((transform.position.x < World.player.transform.position.x - DELETE_LEFT_DIST) && deletionFlag && !myRenderer.isVisible)
 		{
 			GetComponent<PooledObject>().ReturnToPool();
 		}
