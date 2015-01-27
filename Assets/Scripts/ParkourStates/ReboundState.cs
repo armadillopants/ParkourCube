@@ -4,7 +4,7 @@ public class ReboundState : ParkourState
 {
 
 	private float reboundTime;
-	private float jumpStrength = 6f;
+	private float jumpStrength = 4f;
 
 	public ReboundState(Player player) : base(player) { }
 

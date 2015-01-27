@@ -14,14 +14,25 @@ public class DoomWall : MonoBehaviour
 
 	public bool canMove;
 
+	public float startDelay;
+
 	void Start()
 	{
 		cam = Camera.main;
-		canMove = true;
+		canMove = false;
 	}
 
 	void Update()
 	{
+		if (startDelay > 0)
+		{
+			startDelay -= Time.deltaTime;
+		}
+		else
+		{
+			canMove = true;
+		}
+
 		if (canMove)
 		{
 			float val = 1f + Mathf.Clamp(World.Instance.playerScore / creepScoreModifier, 0f, maxModifier);

@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creepSpeed: .150000006
-  pushback: .5
+  pushback: .75
   creepScoreModifier: 50
   maxModifier: .5
   canMove: 0
