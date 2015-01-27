@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 public class World : Singleton<World>
 {
-	static List<int> ids;
 	public const int SPAWN_AHEAD = 2;
 	public const int WATCH_TIME = 1;
 	private const float REPEAT_MOD =  0.6f;
@@ -33,11 +32,8 @@ public class World : Singleton<World>
 
 	public static DoomWall doomWall;
 
-	public int toWatch = 0;
-
 	public static World CreateNewWorld()
 	{
-		ids = new List<int>();
 		//if(!WorldObject.Generated) { WorldObject.Load(); }
 		instance = new World();
 
@@ -58,11 +54,6 @@ public class World : Singleton<World>
 		spawned.Add(dInst);
 
 		return instance;
-	}
-
-	public static List<int> GetIDList()
-	{
-		return ids;
 	}
 
 	public World()
@@ -118,12 +109,6 @@ public class World : Singleton<World>
 			initialScale.x = 10f;
 			initialTerrain.transform.localScale = initialScale;
 			firstRoll = false;
-
-			AssholeWatcher aHole = initialTerrain.AddComponent<AssholeWatcher>();
-			aHole.OnStart();
-			ids.Add(initialTerrain.GetInstanceID());
-			
-			toWatch++;
 		}
 
 		// Create the new obstacle.
