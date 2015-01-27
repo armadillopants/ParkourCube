@@ -182,8 +182,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 446160}
-  - 114: {fileID: 11446164}
-  - 114: {fileID: 11446166}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -265,8 +263,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 446170}
-  - 114: {fileID: 11446170}
-  - 114: {fileID: 11446168}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -856,54 +852,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacle: {fileID: 11446140}
---- !u!114 &11446164
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a72cf8ab139aca14aacb2c0487a43aab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 446164}
---- !u!114 &11446166
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89ff6579cffe1b54a90f9f14d090f986, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11446168
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89ff6579cffe1b54a90f9f14d090f986, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11446170
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a72cf8ab139aca14aacb2c0487a43aab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 446166}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
