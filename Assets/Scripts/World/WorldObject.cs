@@ -37,7 +37,7 @@ public class WorldObject : MonoBehaviour, IPoolable
 			foreach(GameObject obj in objects)
 			{
 				Debug.Log("Adding");
-				ObjectPool pool = new ObjectPool(obj, PRELOAD, true);
+				ObjectPool pool = new ObjectPool(obj, 1, true);
 				obstacles.Add(pool);
 			}
 			totalObstacles = obstacles.Count;
@@ -47,7 +47,7 @@ public class WorldObject : MonoBehaviour, IPoolable
 			Debug.LogError("No obstacles found in Assets/Resources/Obstacles");
 			Debug.Break();
 		}
-		terrain = new ObjectPool(Resources.Load<GameObject>("Terrain"), 10, true);
+		terrain = new ObjectPool(Resources.Load<GameObject>("Terrain"), 1, true);
 	}
 
 	public static GameObject GetObstacle(int index)
@@ -89,7 +89,7 @@ public class WorldObject : MonoBehaviour, IPoolable
 	{
 		if(deletionFlag && !myRenderer.isVisible)
 		{
-			Debug.Log("Deleting self. " + name);
+			//Debug.Log("Deleting self. " + name);
 			GetComponent<PooledObject>().ReturnToPool();
 		}
 	}

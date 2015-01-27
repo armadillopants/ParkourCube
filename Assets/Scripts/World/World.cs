@@ -7,8 +7,9 @@ using System.Collections.Generic;
 
 public class World : Singleton<World>
 {
-	public const int SPAWN_AHEAD = 20;
-	public const int WATCH_TIME = 3;
+	static List<int> ids;
+	public const int SPAWN_AHEAD = 2;
+	public const int WATCH_TIME = 1;
 	private const float REPEAT_MOD =  0.6f;
 
 	private const float MIN_DISTANCE = 5f;
@@ -32,8 +33,11 @@ public class World : Singleton<World>
 
 	public static DoomWall doomWall;
 
+	public int toWatch = 0;
+
 	public static World CreateNewWorld()
 	{
+		ids = new List<int>();
 		//if(!WorldObject.Generated) { WorldObject.Load(); }
 		instance = new World();
 
@@ -53,9 +57,12 @@ public class World : Singleton<World>
 		doomWall = dInst.GetComponent<DoomWall>();
 		spawned.Add(dInst);
 
-		// Create new doom wall
-
 		return instance;
+	}
+
+	public static List<int> GetIDList()
+	{
+		return ids;
 	}
 
 	public World()
@@ -111,6 +118,12 @@ public class World : Singleton<World>
 			initialScale.x = 10f;
 			initialTerrain.transform.localScale = initialScale;
 			firstRoll = false;
+
+			AssholeWatcher aHole = initialTerrain.AddComponent<AssholeWatcher>();
+			aHole.OnStart();
+			ids.Add(initialTerrain.GetInstanceID());
+			
+			toWatch++;
 		}
 
 		// Create the new obstacle.
@@ -121,32 +134,7 @@ public class World : Singleton<World>
 
 		spawned.Add(toSpawn);
 
-		// Create the terrain below it.
-		GameObject uTerrain = WorldObject.GetTerrain();
-		if (obstacle.startingPoint != null)
-		{
-			uTerrain.transform.position = obstacle.startingPoint.position;
-		}
-		else
-		{
-			uTerrain.transform.position = lastSpawned.transform.position;
-		}
-		Vector3 uTScale = uTerrain.transform.localScale;
-		uTScale.x = obstacle.size;
-		uTerrain.transform.localScale = uTScale;
-
-		spawned.Add(uTerrain);
-
-		// Create the terrain ahead of it.
-		GameObject fTerrain = WorldObject.GetTerrain();
-		WorldObject fTObj = fTerrain.GetComponent<WorldObject>();
-		fTerrain.transform.position = obstacle.GetTrailingPoint();
-		Vector3 fTScale = fTerrain.transform.localScale;
-		fTScale.x = GetTerrainLength();
-		fTerrain.transform.localScale = fTScale;
-		nextPiecePosition = fTObj.GetTrailingPoint();
-
-		spawned.Add(fTerrain);
+		nextPiecePosition = obstacle.ResizeFollowerTerrain(GetTerrainLength());
 	}
 
 	private float GetTerrainLength()
@@ -171,7 +159,7 @@ public class World : Singleton<World>
 		int hIndex = 0;
 		float hRoll = 0f;
 		int[] rolls = new int[WorldObject.NumObstacles];
-		for(int i=0; i<WorldObject.NumObstacles; ++i)
+		for(int i=0; i<spawnQueue.Length; ++i) //i<WorldObject.NumObstacles; ++i)
 		{
 			if(spawnQueue[i] > -1)
 				++rolls[spawnQueue[i]];
@@ -196,7 +184,7 @@ public class World : Singleton<World>
 		GameManager.Instance.UpdateScore(instance.playerScore);
 		instance.BuildNext();
 		obstacle.FlagForDeletion();
-		doomWall.PushBack();
+		//doomWall.PushBack();
 	}
 
 	public static void ReportPerfectObstacleUse(Obstacle obstacle)

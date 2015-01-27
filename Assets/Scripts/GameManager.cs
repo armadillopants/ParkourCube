@@ -29,9 +29,9 @@ public class GameManager : MSingleton<GameManager>
 	{
 		menu.SetActive(false);
 		score.SetActive(true);
-		Application.LoadLevel(1);
 		pauseButton.SetActive(true);
-		World.CreateNewWorld();
+		Application.LoadLevel(1);
+		//World.CreateNewWorld();
 	}
 
 	public void OnPause()

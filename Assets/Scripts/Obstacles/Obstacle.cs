@@ -9,6 +9,8 @@ public class Obstacle : WorldObject
 
 	public Transform startingPoint;
 
+	public Transform follower;
+
 	public TriggerWatcher[] priorityList;
 
 	public bool SuccessfulInteraction
@@ -44,7 +46,8 @@ public class Obstacle : WorldObject
 					if(!pBox.Disabled)
 					{
 						perfectInteraction = true;
-						World.ReportPerfectObstacleUse(this);
+						//World.ReportPerfectObstacleUse(this);
+						World.ReportNormalObstacleUse(this);
 					}
 					else
 					{
@@ -65,5 +68,14 @@ public class Obstacle : WorldObject
 	public bool IsPerfectInteraction()
 	{
 		return perfectInteraction;
+	}
+
+	public Vector3 ResizeFollowerTerrain(float size)
+	{
+		follower.localScale = new Vector3(size, 1, 1);
+
+		Vector3 newPosition = follower.position;
+		newPosition.x += size;
+		return newPosition;
 	}
 }

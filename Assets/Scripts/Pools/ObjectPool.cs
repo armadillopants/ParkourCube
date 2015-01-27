@@ -32,25 +32,24 @@ public class ObjectPool
 
 		GameObject instance = pool.Pop();
 		instance.SetActive(true);
+		//Debug.Log(instance.GetInstanceID());
 		return instance;
 	}
 
 	public void Return(PooledObject obj)
 	{
 		var scripts = obj.GetComponentsInChildren<MonoBehaviour>().Where(x => x is IPoolable);
-		obj.gameObject.SetActive(false);
+		//obj.gameObject.SetActive(false);
 		foreach(MonoBehaviour script in scripts)
 		{
-			Debug.Log("Resetting");
 			((IPoolable)script).Reset();
 		}
 		pool.Push(obj.gameObject);
-		Debug.Log("Object returned to pool: " + obj.name);
 	}
 
 	public void CreateNewInstance()
 	{
-		GameObject instance = (GameObject)GameObject.Instantiate(prefab);
+		GameObject instance = (GameObject)GameObject.Instantiate(prefab, new Vector3(-100, -100), Quaternion.identity);
 		PooledObject pObj = instance.GetComponent<PooledObject>();
 
 		if(!pObj)
@@ -59,7 +58,7 @@ public class ObjectPool
 			Debug.LogWarning("No PooledObject script found on " + prefab.name);
 		}
 		pObj.SetPool(this);
-		instance.SetActive(false);
+		//instance.SetActive(false);
 		pool.Push(instance);
 	}
 }
