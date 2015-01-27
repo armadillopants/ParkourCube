@@ -8,4 +8,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/fuckingwork.unity
   - enabled: 1
-    path: Assets/Temp/TestLevel.unity
+    path: Assets/Scenes/GameLevel.unity

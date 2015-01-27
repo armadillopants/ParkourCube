@@ -24,7 +24,7 @@ public class World : Singleton<World>
 	private int totalSpawned;
 	private Vector3 nextPiecePosition;
 
-	private int playerScore;
+	public int playerScore;
 
 	private static List<GameObject> spawned;
 
