@@ -3,49 +3,42 @@ using UnityEngine.UI;
 
 public class GameManager : MSingleton<GameManager>
 {
-	public Canvas menu;
-	public Canvas score;
-	public Canvas postGame;
-	public Canvas pause;
+	public GameObject menu;
+	public GameObject score;
+	public GameObject postGame;
+	public GameObject pause;
+	public GameObject pauseButton;
 
 	private bool isPaused;
 
 	void Start()
 	{
-		menu.enabled = true;
-		score.enabled = false;
-		postGame.enabled = false;
-		pause.enabled = false;
-	}
-
-	void Update()
-	{
-		// Temp
-		if (Input.GetKeyDown(KeyCode.Escape) && !isPaused)
-		{
-			OnPause();
-		}
+		menu.SetActive(true);
+		score.SetActive(false);
+		postGame.SetActive(false);
+		pause.SetActive(false);
+		pauseButton.SetActive(false);
 	}
 
 	public void OnPlayButton()
 	{
-		menu.enabled = false;
-		score.enabled = true;
+		menu.SetActive(false);
+		score.SetActive(true);
 		World.CreateNewWorld();
 	}
 
-	void OnPause()
+	public void OnPause()
 	{
 		Time.timeScale = 0f;
-		pause.enabled = true;
-		isPaused = true;
+		pause.SetActive(true);
+		pauseButton.SetActive(false);
 	}
 
 	public void OnResume()
 	{
 		Time.timeScale = 1f;
-		pause.enabled = false;
-		isPaused = false;
+		pause.SetActive(false);
+		pauseButton.SetActive(true);
 	}
 
 	public void OnQuitButton()
@@ -55,14 +48,16 @@ public class GameManager : MSingleton<GameManager>
 
 	public void OnGameOver()
 	{
-		score.enabled = false;
-		postGame.enabled = true;
+		score.SetActive(false);
+		pauseButton.SetActive(false);
+		postGame.SetActive(true);
 	}
 
 	public void OnGameOverRestart()
 	{
-		score.enabled = true;
-		postGame.enabled = false;
+		score.SetActive(true);
+		pauseButton.SetActive(true);
+		postGame.SetActive(false);
 		ResetScore();
 		World.Clear();
 		World.CreateNewWorld();
@@ -70,8 +65,9 @@ public class GameManager : MSingleton<GameManager>
 
 	public void OnGameOverBack()
 	{
-		postGame.enabled = false;
-		menu.enabled = true;
+		postGame.SetActive(false);
+		pauseButton.SetActive(false);
+		menu.SetActive(true);
 		ResetScore();
 		World.Clear();
 	}
