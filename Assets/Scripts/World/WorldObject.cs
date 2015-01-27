@@ -29,12 +29,14 @@ public class WorldObject : MonoBehaviour, IPoolable
 
 	public static void Load()
 	{
+		Debug.Log("Called");
 		GameObject[] objects = Resources.LoadAll<GameObject>("Obstacles/");
 		if(objects != null)
 		{
 			obstacles = new List<ObjectPool>();
 			foreach(GameObject obj in objects)
 			{
+				Debug.Log("Adding");
 				ObjectPool pool = new ObjectPool(obj, PRELOAD, true);
 				obstacles.Add(pool);
 			}
@@ -58,6 +60,7 @@ public class WorldObject : MonoBehaviour, IPoolable
 		return terrain.Get();
 	}
 	#endregion
+
 	protected static System.Random spRandom;
 
 	public Transform[] spawnPoints;
@@ -86,6 +89,7 @@ public class WorldObject : MonoBehaviour, IPoolable
 	{
 		if(deletionFlag && !myRenderer.isVisible)
 		{
+			Debug.Log("Deleting self. " + name);
 			GetComponent<PooledObject>().ReturnToPool();
 		}
 	}
