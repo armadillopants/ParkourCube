@@ -4,11 +4,15 @@ using System.Collections.Generic;
 public class InputMonitor : MSingleton<InputMonitor>
 {
 #if UNITY_ANDROID
-	private const float HOLD_MAG = 0.2f;
+	private const float HOLD_MAG = 20f;
 #else
 	private const float HOLD_MAG = 60f;
 #endif
 	private const int HOLD_DUR = 20;
+
+	private const int WATCH_FOR = 20;
+
+	private List<Vector2> inputs = new List<Vector2>();
 
 	[SerializeField]
 	private bool wasTouching;
@@ -61,23 +65,34 @@ public class InputMonitor : MSingleton<InputMonitor>
 			deltaDirection = Vector2.zero;
 			numFrames = 0;
 			swipeConsumed = false;
-		}
-
-		if(!wasTouching && isTouching)
-		{
-#if !UNITY_ANDROID
-			previousMousePosition = Input.mousePosition;
-#endif
+			inputs.Clear();
 		}
 
 		if(isTouching)
 		{
 			numFrames++;
+
+			if(inputs.Count == WATCH_FOR)
+			{
+				Debug.Log("Clearing earliest");
+				deltaSum -= inputs[0];
+				inputs.RemoveAt(0);
+			}
+
 #if UNITY_ANDROID
-			deltaSum += Input.touches[0].deltaPosition;
+			Vector2 delta = Input.touches[0].deltaPosition;
+			deltaSum += delta;
+			inputs.Add(delta);
 #elif UNITY_EDITOR || UNITY_STANDALONE
+			if(!wasTouching)
+			{
+				previousMousePosition = Input.mousePosition;
+			}
+
 			Vector2 mousePos = Input.mousePosition;
 			Vector2 mouseDelta = mousePos - previousMousePosition;
+
+			inputs.Add(mouseDelta);
 			deltaSum += mouseDelta;
 			previousMousePosition = mousePos;
 #endif
