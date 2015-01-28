@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿//#define AUTOMODE
+#undef AUTOMODE
+
+using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(TriggerWatcher))]
@@ -11,6 +14,10 @@ public class BehaviourActuator : MonoBehaviour
 
 	public bool ResolveInput(Player player)
 	{
+#if AUTOMODE
+		ParkourState.CreateInstance(onRead, player, true);
+		return true;
+#else
 		bool result = GetRelevantInput();
 		if(result)
 		{
@@ -18,6 +25,7 @@ public class BehaviourActuator : MonoBehaviour
 			return true;
 		}
 		return false;
+#endif
 	}
 	
 	private bool GetRelevantInput()

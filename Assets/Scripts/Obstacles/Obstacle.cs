@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿//#define AUTOMODE
+#undef AUTOMODE
+
+using UnityEngine;
 
 [RequireComponent(typeof(PooledObject))]
 public class Obstacle : WorldObject
@@ -13,6 +16,10 @@ public class Obstacle : WorldObject
 
 	public TriggerWatcher[] priorityList;
 
+#if AUTOMODE
+	private BehaviourActuator lastUsed;
+#endif
+
 	public bool SuccessfulInteraction
 	{
 		get { return successfulInteraction; }
@@ -23,6 +30,11 @@ public class Obstacle : WorldObject
 	public override void Update()
 	{
 		base.Update();
+
+#if AUTOMODE
+		Player player = GameObject.FindObjectOfType<Player>();
+		TryUse(player);
+#endif
 	}
 
 	public Transform GetRandomSpawnPoint()
@@ -37,6 +49,30 @@ public class Obstacle : WorldObject
 			if(!GameManager.Instance.GameOver && priorityList[i].IsPlayerTouching)
 			{
 				BehaviourActuator bActuator = priorityList[i].GetComponent<BehaviourActuator>();
+
+#if AUTOMODE
+				if(bActuator != lastUsed)
+				{
+					lastUsed = bActuator;
+
+					bool success = bActuator.ResolveInput(player);
+					if(success)
+					{
+						successfulInteraction = true;
+
+						PerfectBoxDisabler pBox = perfectBox.GetComponent<PerfectBoxDisabler>();
+						if(!pBox.Disabled)
+						{
+							perfectInteraction = true;
+							World.ReportPerfectObstacleUse(this);
+						}
+						else
+						{
+							World.ReportNormalObstacleUse(this);
+						}
+					}
+				}
+#else
 				bool success = bActuator.ResolveInput(player);
 				if(success)
 				{
@@ -53,6 +89,7 @@ public class Obstacle : WorldObject
 						World.ReportNormalObstacleUse(this);
 					}
 				}
+#endif
 			}
 		}
 	}
@@ -62,6 +99,9 @@ public class Obstacle : WorldObject
 		base.Reset();
 		successfulInteraction = false;
 		perfectInteraction = false;
+#if AUTOMODE
+		lastUsed = null;
+#endif
 	}
 
 	public bool IsPerfectInteraction()
