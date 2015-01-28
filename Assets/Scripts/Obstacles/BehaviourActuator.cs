@@ -19,7 +19,7 @@ public class BehaviourActuator : MonoBehaviour
 		return true;
 #else
 		bool result = GetRelevantInput();
-		if(result)
+		if (result)
 		{
 			ParkourState.CreateInstance(onRead, player, true);
 			return true;

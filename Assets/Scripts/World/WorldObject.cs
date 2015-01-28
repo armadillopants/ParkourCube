@@ -89,7 +89,10 @@ public class WorldObject : MonoBehaviour, IPoolable
 	{
 		if ((transform.position.x < World.player.transform.position.x - DELETE_LEFT_DIST) && deletionFlag && !myRenderer.isVisible)
 		{
-			GetComponent<PooledObject>().ReturnToPool();
+			if (GameManager.Instance.TutorialCompleted)
+			{
+				GetComponent<PooledObject>().ReturnToPool();
+			}
 		}
 	}
 

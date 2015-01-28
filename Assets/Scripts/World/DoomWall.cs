@@ -24,13 +24,16 @@ public class DoomWall : MonoBehaviour
 
 	void Update()
 	{
-		if (startDelay > 0)
+		if (GameManager.Instance.TutorialCompleted)
 		{
-			startDelay -= Time.deltaTime;
-		}
-		else
-		{
-			canMove = true;
+			if (startDelay > 0)
+			{
+				startDelay -= Time.deltaTime;
+			}
+			else
+			{
+				canMove = true;
+			}
 		}
 
 		if (canMove)

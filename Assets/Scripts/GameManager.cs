@@ -9,6 +9,13 @@ public class GameManager : MSingleton<GameManager>
 	public GameObject pause;
 	public GameObject pauseButton;
 
+	public bool TutorialCompleted
+	{
+		get { return tutorialCompleted; }
+		set { tutorialCompleted = value; }
+	}
+	private bool tutorialCompleted;
+
 	public bool GameOver
 	{
 		get { return gameOver; }
@@ -17,6 +24,7 @@ public class GameManager : MSingleton<GameManager>
 
 	void Start()
 	{
+		PlayerPrefs.DeleteAll();
 		DontDestroyOnLoad(this);
 		menu.SetActive(true);
 		score.SetActive(false);
@@ -30,6 +38,7 @@ public class GameManager : MSingleton<GameManager>
 		menu.SetActive(false);
 		score.SetActive(true);
 		pauseButton.SetActive(true);
+		tutorialCompleted = PlayerPrefs.GetInt("TutorialCompleted") == 1;
 		Application.LoadLevel(1);
 		//World.CreateNewWorld();
 	}

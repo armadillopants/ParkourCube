@@ -10,7 +10,7 @@ public class InputMonitor : MSingleton<InputMonitor>
 #endif
 	private const int HOLD_DUR = 20;
 
-	private const int WATCH_FOR = 20;
+	private const int WATCH_FOR = 10;
 
 	private List<Vector2> inputs = new List<Vector2>();
 

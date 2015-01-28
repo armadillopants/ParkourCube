@@ -13,6 +13,7 @@ public class TriggerWatcher : MonoBehaviour, IPoolable
 			playerTouching = true;
 		}
 	}
+
 	void OnTriggerExit2D(Collider2D other)
 	{
 		if(other.tag == "Player")

@@ -71,8 +71,20 @@ public class Player : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		GameObject root = other.RootGameObject();
-		Obstacle obs = root.GetComponent<Obstacle>();
+		GameObject root = null;
+		Obstacle obs = null;
+
+		if (!GameManager.Instance.TutorialCompleted)
+		{
+			root = other.transform.parent.gameObject;
+			obs = root.GetComponent<Obstacle>();
+		} 
+		else 
+		{
+			root = other.RootGameObject();
+			obs = root.GetComponent<Obstacle>();
+		}
+
 		if(obs)
 		{
 			obstacle = obs;
