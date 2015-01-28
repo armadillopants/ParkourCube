@@ -35,10 +35,12 @@ public class World : Singleton<World>
 
 	public static World CreateNewWorld()
 	{
-		if(!WorldObject.Generated) { WorldObject.Load(); }
+		//if(!WorldObject.Generated) { WorldObject.Load(); }
 		instance = new World();
 
 		Vector3 location = new Vector3();
+
+		Debug.Log(player);
 
 		if (!GameManager.Instance.TutorialCompleted)
 		{
@@ -46,7 +48,7 @@ public class World : Singleton<World>
 		}
 		else
 		{
-			location = new Vector3(-9f, 0f, 0f);
+			location = new Vector3(-9f, 0.5f, 0f);
 		}
 
 		if (!GameManager.Instance.TutorialCompleted)
@@ -185,8 +187,11 @@ public class World : Singleton<World>
 	public static void ReportNormalObstacleUse(Obstacle obstacle)
 	{
 		Debug.Log("Normal");
-		instance.playerScore++;
-		GameManager.Instance.UpdateScore(instance.playerScore);
+		if (GameManager.Instance.TutorialCompleted)
+		{
+			instance.playerScore++;
+			GameManager.Instance.UpdateScore(instance.playerScore);
+		}
 		instance.BuildNext();
 		obstacle.FlagForDeletion();
 		//doomWall.PushBack();
@@ -195,8 +200,11 @@ public class World : Singleton<World>
 	public static void ReportPerfectObstacleUse(Obstacle obstacle)
 	{
 		Debug.Log("Perfect");
-		instance.playerScore += 2;
-		GameManager.Instance.UpdateScore(instance.playerScore);
+		if (GameManager.Instance.TutorialCompleted)
+		{
+			instance.playerScore += 2;
+			GameManager.Instance.UpdateScore(instance.playerScore);
+		}
 		instance.BuildNext();
 		obstacle.FlagForDeletion();
 		doomWall.PushBack();

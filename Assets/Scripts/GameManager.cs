@@ -31,14 +31,16 @@ public class GameManager : MSingleton<GameManager>
 		postGame.SetActive(false);
 		pause.SetActive(false);
 		pauseButton.SetActive(false);
+		tutorialCompleted = PlayerPrefs.GetInt("TutorialCompleted") == 1;
 	}
 
 	public void OnPlayButton()
 	{
 		menu.SetActive(false);
 		score.SetActive(true);
+		ResetScore();
 		pauseButton.SetActive(true);
-		tutorialCompleted = PlayerPrefs.GetInt("TutorialCompleted") == 1;
+		Time.timeScale = 1f;
 		Application.LoadLevel(1);
 		//World.CreateNewWorld();
 	}
@@ -76,7 +78,6 @@ public class GameManager : MSingleton<GameManager>
 		score.SetActive(true);
 		pauseButton.SetActive(true);
 		postGame.SetActive(false);
-		ResetScore();
 		OnPlayButton();
 		//World.Clear();
 		//World.CreateNewWorld();
@@ -84,12 +85,14 @@ public class GameManager : MSingleton<GameManager>
 
 	public void OnGameOverBack()
 	{
+		World.player = null;
+		Destroy(World.player);
 		gameOver = false;
 		postGame.SetActive(false);
 		pause.SetActive(false);
 		pauseButton.SetActive(false);
+		score.SetActive(false);
 		menu.SetActive(true);
-		//ResetScore();
 		//World.Clear();
 		Application.LoadLevel(0);
 	}

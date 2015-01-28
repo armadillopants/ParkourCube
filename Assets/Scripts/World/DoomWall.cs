@@ -19,21 +19,22 @@ public class DoomWall : MonoBehaviour
 	void Start()
 	{
 		cam = Camera.main;
-		canMove = false;
+		canMove = true;
 	}
 
 	void Update()
 	{
 		if (GameManager.Instance.TutorialCompleted)
 		{
+			startDelay -= Time.deltaTime;
 			if (startDelay > 0)
 			{
-				startDelay -= Time.deltaTime;
+				return;
 			}
-			else
-			{
-				canMove = true;
-			}
+		}
+		else
+		{
+			return;
 		}
 
 		if (canMove)

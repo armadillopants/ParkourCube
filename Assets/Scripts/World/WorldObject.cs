@@ -87,11 +87,14 @@ public class WorldObject : MonoBehaviour, IPoolable
 
 	public virtual void Update()
 	{
-		if ((transform.position.x < World.player.transform.position.x - DELETE_LEFT_DIST) && deletionFlag && !myRenderer.isVisible)
+		if (World.player)
 		{
-			if (GameManager.Instance.TutorialCompleted)
+			if ((transform.position.x < World.player.transform.position.x - DELETE_LEFT_DIST) && deletionFlag && !myRenderer.isVisible)
 			{
-				GetComponent<PooledObject>().ReturnToPool();
+				if (GameManager.Instance.TutorialCompleted)
+				{
+					GetComponent<PooledObject>().ReturnToPool();
+				}
 			}
 		}
 	}

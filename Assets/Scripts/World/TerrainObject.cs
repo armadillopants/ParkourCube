@@ -9,7 +9,10 @@ public class TerrainObject : WorldObject
 	{
 		base.Update();
 
-		if(transform.position.x < World.player.transform.position.x - DELETE_LEFT_DIST) { deletionFlag = true; }
+		if (World.player)
+		{
+			if (transform.position.x < World.player.transform.position.x - DELETE_LEFT_DIST) { deletionFlag = true; }
+		}
 
 		//if(!wasVisible && myRenderer.isVisible) { wasVisible = true; }
 		//if(wasVisible && !myRenderer.isVisible) { deletionFlag = true; }
