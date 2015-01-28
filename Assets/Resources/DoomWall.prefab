@@ -113,6 +113,7 @@ MonoBehaviour:
   creepScoreModifier: 50
   maxModifier: .5
   canMove: 0
+  startDelay: 3
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

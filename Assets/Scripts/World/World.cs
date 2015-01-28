@@ -19,6 +19,8 @@ public class World : Singleton<World>
 	private Dictionary<int, int> counts;
 
 	private bool firstRoll;
+	private static bool spawnTutorial;
+	private static GameObject tutorialObject;
 	private GameObject lastSpawned;
 	private int[] spawnQueue;
 	private int totalSpawned;
@@ -37,9 +39,28 @@ public class World : Singleton<World>
 		if(!WorldObject.Generated) { WorldObject.Load(); }
 		instance = new World();
 
+		Vector3 location = new Vector3();
+
+		if (!spawnTutorial)
+		{
+			location = new Vector3(-57f, -2, 0f);
+		}
+		else
+		{
+			location = new Vector3(-9f, 0f, 0f);
+		}
+
+		if (!spawnTutorial)
+		{
+			GameObject spawnObj = Resources.Load("Tutorial") as GameObject;
+			GameObject tutInst = GameObject.Instantiate(spawnObj, Vector3.zero, Quaternion.identity) as GameObject;
+			tutorialObject = tutInst;
+			spawnTutorial = true;
+		}
+
 		// Create new player
 		GameObject playerObject = Resources.Load("Player") as GameObject;
-		GameObject pInst = GameObject.Instantiate(playerObject, new Vector3(-9f, 0, 0), Quaternion.identity) as GameObject;
+		GameObject pInst = GameObject.Instantiate(playerObject, location, Quaternion.identity) as GameObject;
 		player = pInst;
 		spawned.Add(pInst);
 
@@ -60,6 +81,8 @@ public class World : Singleton<World>
 	{
 		spawned = new List<GameObject>();
 		firstRoll = true;
+		spawnTutorial = PlayerPrefs.GetInt("TutorialCompleted") == 1;
+		Debug.Log(spawnTutorial);
 		nextPiecePosition = Vector3.zero;
 		counts = new Dictionary<int, int>();
 		spawnQueue = new int[SPAWN_AHEAD];
