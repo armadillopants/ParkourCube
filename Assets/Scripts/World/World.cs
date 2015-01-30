@@ -40,11 +40,9 @@ public class World : Singleton<World>
 
 		Vector3 location = new Vector3();
 
-		Debug.Log(player);
-
 		if (!GameManager.Instance.TutorialCompleted)
 		{
-			location = new Vector3(-57f, -2, 0f);
+			location = new Vector3(-68f, -2, 0f);
 		}
 		else
 		{

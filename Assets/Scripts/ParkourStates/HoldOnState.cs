@@ -17,8 +17,6 @@ public class HoldOnState : ParkourState
 	{
 		base.Update();
 
-		if (TryPullUp()) { return; }
-
 		owner.transform.position = hangPos;
 
 		if (owner.GetBody().transform.eulerAngles != Vector3.zero)
