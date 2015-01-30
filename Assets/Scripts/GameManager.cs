@@ -104,7 +104,19 @@ public class GameManager : MSingleton<GameManager>
 
 	public void DisplayFinalScore(int playerScore)
 	{
-		postGame.transform.GetChild(1).GetComponentInChildren<Text>().text = playerScore.ToString();
+		Text finalScore = postGame.transform.GetChild(1).GetComponentInChildren<Text>();
+		finalScore.text = playerScore.ToString();
+		int newScore = int.Parse(finalScore.text);
+
+		Text highScore = postGame.transform.GetChild(3).GetComponentInChildren<Text>();
+		int myScore = int.Parse(highScore.text);
+
+		if (newScore > myScore)
+		{
+			highScore.text = playerScore.ToString();
+			PlayerPrefs.SetString("HighScore", highScore.text);
+		}
+
 	}
 
 	private void ResetScore()
