@@ -164,7 +164,7 @@ public class World : Singleton<World>
 		int hIndex = 0;
 		float hRoll = 0f;
 		int[] rolls = new int[WorldObject.NumObstacles];
-		for(int i=0; i<spawnQueue.Length; ++i) //i<WorldObject.NumObstacles; ++i)
+		for(int i=0; i<spawnQueue.Length; ++i) 
 		{
 			if(spawnQueue[i] > -1)
 				++rolls[spawnQueue[i]];
@@ -192,7 +192,6 @@ public class World : Singleton<World>
 		}
 		instance.BuildNext();
 		obstacle.FlagForDeletion();
-		//doomWall.PushBack();
 	}
 
 	public static void ReportPerfectObstacleUse(Obstacle obstacle)
@@ -206,12 +205,10 @@ public class World : Singleton<World>
 		instance.BuildNext();
 		obstacle.FlagForDeletion();
 		doomWall.PushBack();
-		//doomWall.PushBack();
 	}
 
 	public static void GameOver()
 	{
-		//Application.LoadLevel(0);
 		GameManager.Instance.OnGameOver();
 		GameManager.Instance.DisplayFinalScore(instance.playerScore);
 		doomWall.canMove = false;

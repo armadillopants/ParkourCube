@@ -4,7 +4,6 @@ public class JumpState : ParkourState
 {
 	private float jumpStrength = 4f;
 	private float jumpTime;
-	private Vector3 lastPosition;
 	private Vector2 velocity;
 
 	private float gravity = 6f;
@@ -32,12 +31,6 @@ public class JumpState : ParkourState
 
 			if (hit.collider != null)
 			{
-				if (Vector2.Distance(owner.transform.position, lastPosition) > 5f)
-				{
-					if (TryRoll()) { return; }
-					else { World.GameOver(); return; }
-				}
-
 				owner.SetState(new RunState(owner));
 				return;
 			}
@@ -45,7 +38,6 @@ public class JumpState : ParkourState
 		else
 		{
 			owner.velocity.y += jumpStrength * Time.fixedDeltaTime;
-			lastPosition = owner.transform.position;
 		}
 
 		owner.Move(owner.velocity);

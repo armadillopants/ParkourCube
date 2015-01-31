@@ -9,6 +9,9 @@ public class GameManager : MSingleton<GameManager>
 	public GameObject pause;
 	public GameObject pauseButton;
 
+	private string fellToDeath;
+	private string[] causeOfDeath = new string[4] { "The Doom Wall was too quick!", "You weren't fast enough.", "Epic Fail", "Oops, you died." };
+
 	public bool TutorialCompleted
 	{
 		get { return tutorialCompleted; }
@@ -117,6 +120,31 @@ public class GameManager : MSingleton<GameManager>
 			PlayerPrefs.SetString("HighScore", highScore.text);
 		}
 
+		Text causeOfDeathText = postGame.transform.GetChild(4).GetComponent<Text>();
+
+		if (!fellToDeath.IsNullOrEmpty())
+		{
+			causeOfDeathText.text = fellToDeath;
+			fellToDeath = "";
+		}
+		else
+		{
+			int rand = Random.Range(0, causeOfDeath.Length);
+
+			for (int i = 0; i < causeOfDeath.Length; i++)
+			{
+				if (i == rand)
+				{
+					causeOfDeathText.text = causeOfDeath[i];
+				}
+			}
+		}
+
+	}
+
+	public void ReportFall(string fallText)
+	{
+		fellToDeath = fallText;
 	}
 
 	private void ResetScore()

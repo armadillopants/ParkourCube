@@ -23,7 +23,6 @@ public class Player : MonoBehaviour
 	private LayerMask playerLayer;
 
 	private Obstacle obstacle;
-	private Obstacle lastObstacle;
 	private GameObject obstacleRoot;
 
 	void Start()
@@ -34,8 +33,6 @@ public class Player : MonoBehaviour
 
 		currentState = new RunState(this);
 		currentState.Enter();
-
-		lastObstacle = null;
 	}
 
 	void FixedUpdate()
@@ -88,7 +85,6 @@ public class Player : MonoBehaviour
 		if(obs)
 		{
 			obstacle = obs;
-			lastObstacle = obstacle;
 			obstacleRoot = root;
 			playerTouching = true;
 		}
@@ -102,11 +98,6 @@ public class Player : MonoBehaviour
 			obstacleRoot = null;
 			playerTouching = false;
 		}
-	}
-
-	public Obstacle GetObstacle()
-	{
-		return lastObstacle;
 	}
 
 	public GameObject GetBody()

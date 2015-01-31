@@ -51,29 +51,6 @@ public abstract class ParkourState : State
 		owner = player;
 	}
 
-	protected bool TryRoll()
-	{
-		RollState state = GetRollState();
-
-		if (state != null)
-		{
-			owner.SetState(state);
-			return true;
-		}
-
-		return false;
-	}
-
-	protected RollState GetRollState()
-	{
-		if (InputMonitor.Instance.Swipe(-Vector2.up))
-		{
-			return new RollState(owner);
-		}
-
-		return null;
-	}
-
 	protected bool TryFall()
 	{
 		FallState state = GetFallState();
@@ -94,29 +71,6 @@ public abstract class ParkourState : State
 		if (hit.collider == null)
 		{
 			return new FallState(owner);
-		}
-
-		return null;
-	}
-
-	protected bool TryPullUp()
-	{
-		PullUpState state = GetPullUpState();
-
-		if (state != null)
-		{
-			owner.SetState(state);
-			return true;
-		}
-
-		return false;
-	}
-
-	protected PullUpState GetPullUpState()
-	{
-		if (InputMonitor.Instance.DidTap())
-		{
-			return new PullUpState(owner);
 		}
 
 		return null;

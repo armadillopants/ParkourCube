@@ -50,6 +50,7 @@ public class ObjectPool
 	public void CreateNewInstance()
 	{
 		GameObject instance = (GameObject)GameObject.Instantiate(prefab, new Vector3(-100, -100), Quaternion.identity);
+		instance.name = prefab.name;
 		PooledObject pObj = instance.GetComponent<PooledObject>();
 
 		if(!pObj)
