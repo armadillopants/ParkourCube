@@ -81,11 +81,13 @@ public class Obstacle : WorldObject
 					PerfectBoxDisabler pBox = perfectBox.GetComponent<PerfectBoxDisabler>();
 					if(!pBox.Disabled)
 					{
+						Instantiate(GameManager.Instance.perfectObject, perfectBox.transform.position, Quaternion.identity);
 						perfectInteraction = true;
 						World.ReportPerfectObstacleUse(this);
 					}
 					else
 					{
+						Instantiate(GameManager.Instance.normalObject, priorityList[i].transform.position, Quaternion.identity);
 						World.ReportNormalObstacleUse(this);
 					}
 				}

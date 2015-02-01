@@ -9,6 +9,9 @@ public class GameManager : MSingleton<GameManager>
 	public GameObject pause;
 	public GameObject pauseButton;
 
+	public GameObject perfectObject;
+	public GameObject normalObject;
+
 	private string fellToDeath;
 	private string[] causeOfDeath = new string[4] { "The Doom Wall was too quick!", "You weren't fast enough.", "Epic Fail", "Oops, you died." };
 

@@ -1145,6 +1145,8 @@ MonoBehaviour:
   postGame: {fileID: 174858}
   pause: {fileID: 174846}
   pauseButton: {fileID: 174814}
+  perfectObject: {fileID: 115802, guid: 08df426ad9048ca4ab9f6c60b9f7582d, type: 2}
+  normalObject: {fileID: 150682, guid: a0a9bbec66762284abeee8466a88d557, type: 2}
 --- !u!114 &11474826
 MonoBehaviour:
   m_ObjectHideFlags: 1
