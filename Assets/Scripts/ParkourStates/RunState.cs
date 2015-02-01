@@ -2,6 +2,8 @@
 
 public class RunState : ParkourState
 {
+	private GameObject runParticle;
+
 	public RunState(Player player) : base(player) { }
 
 	public override void Enter()
@@ -10,6 +12,9 @@ public class RunState : ParkourState
 
 		owner.velocity = Vector2.right;
 		LeanTween.scaleY(owner.GetBody(), 1f, 5f * Time.fixedDeltaTime);
+
+		runParticle = owner.transform.GetChild(0).gameObject;
+		runParticle.SetActive(true);
 	}
 
 	public override void Update()
@@ -29,5 +34,7 @@ public class RunState : ParkourState
 	public override void Exit()
 	{
 		base.Exit();
+
+		runParticle.SetActive(false);
 	}
 }

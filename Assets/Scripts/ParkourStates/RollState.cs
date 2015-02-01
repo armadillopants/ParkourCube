@@ -5,6 +5,8 @@ public class RollState : ParkourState
 
 	private float rollTime;
 
+	private GameObject rollParticle;
+
 	public RollState(Player player) : base(player) { }
 
 	public override void Enter()
@@ -14,6 +16,9 @@ public class RollState : ParkourState
 		rollTime = 0.3f;
 
 		owner.velocity = Vector2.right;
+
+		rollParticle = owner.transform.GetChild(6).gameObject;
+		rollParticle.SetActive(true);
 	}
 
 	public override void Update()
@@ -42,5 +47,7 @@ public class RollState : ParkourState
 
 		LeanTween.scaleY(owner.GetBody(), 1f, 5f * Time.fixedDeltaTime);
 		owner.GetBody().transform.eulerAngles = Vector3.zero;
+
+		rollParticle.SetActive(false);
 	}
 }

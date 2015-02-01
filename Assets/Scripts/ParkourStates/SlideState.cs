@@ -5,6 +5,8 @@ public class SlideState : ParkourState
 	private float slideTime;
 	private float slideSpeed = 3f;
 
+	private GameObject slideParticle;
+
 	public SlideState(Player player) : base(player) { }
 
 	public override void Enter()
@@ -14,6 +16,9 @@ public class SlideState : ParkourState
 		slideTime = 0f;
 
 		owner.velocity = Vector2.right;
+
+		slideParticle = owner.transform.GetChild(5).gameObject;
+		slideParticle.SetActive(true);
 	}
 
 	public override void Update()
@@ -35,5 +40,7 @@ public class SlideState : ParkourState
 	public override void Exit()
 	{
 		base.Exit();
+
+		slideParticle.SetActive(false);
 	}
 }

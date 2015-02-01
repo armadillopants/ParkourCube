@@ -6,6 +6,8 @@ public class VaultState : ParkourState
 	private float yMod = 1.5f;
 	private float vaultTime;
 
+	private GameObject vaultParticle;
+
 	public VaultState(Player player) : base(player) { }
 
 	public override void Enter()
@@ -16,6 +18,9 @@ public class VaultState : ParkourState
 		owner.velocity = Vector2.right;
 
 		LeanTween.rotateZ(owner.GetBody(), -45, 5f * Time.fixedDeltaTime);
+
+		vaultParticle = owner.transform.GetChild(4).gameObject;
+		vaultParticle.SetActive(true);
 	}
 
 	public override void Update()
@@ -38,5 +43,7 @@ public class VaultState : ParkourState
 	public override void Exit()
 	{
 		base.Exit();
+
+		vaultParticle.SetActive(false);
 	}
 }

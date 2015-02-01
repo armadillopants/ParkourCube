@@ -6,6 +6,8 @@ public class ReboundState : ParkourState
 	private float reboundTime;
 	private float jumpStrength = 4f;
 
+	private GameObject reboundParticle;
+
 	public ReboundState(Player player) : base(player) { }
 
 	public override void Enter()
@@ -17,6 +19,7 @@ public class ReboundState : ParkourState
 		if (rightWallHit.collider != null)
 		{
 			owner.velocity = -Vector2.right;
+			reboundParticle = owner.transform.GetChild(1).gameObject;
 		}
 
 		RaycastHit2D leftWallHit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(-0.6f, 0, 0), owner.GetLayerMask());
@@ -24,7 +27,10 @@ public class ReboundState : ParkourState
 		if (leftWallHit.collider != null)
 		{
 			owner.velocity = Vector2.right;
+			reboundParticle = owner.transform.GetChild(2).gameObject;
 		}
+
+		reboundParticle.SetActive(true);
 
 		reboundTime = 0f;
 	}
@@ -56,5 +62,7 @@ public class ReboundState : ParkourState
 	public override void Exit()
 	{
 		base.Exit();
+
+		reboundParticle.SetActive(false);
 	}
 }

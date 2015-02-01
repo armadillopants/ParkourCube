@@ -8,6 +8,8 @@ public class JumpState : ParkourState
 
 	private float gravity = 6f;
 
+	private GameObject jumpParticle;
+
 	public JumpState(Player player) : base(player) { }
 
 	public override void Enter()
@@ -15,6 +17,9 @@ public class JumpState : ParkourState
 		base.Enter();
 
 		jumpTime = 0f;
+
+		jumpParticle = owner.transform.GetChild(7).gameObject;
+		jumpParticle.SetActive(true);
 	}
 
 	public override void Update()
@@ -51,5 +56,7 @@ public class JumpState : ParkourState
 	public override void Exit()
 	{
 		base.Exit();
+
+		jumpParticle.SetActive(false);
 	}
 }

@@ -4,6 +4,8 @@ public class ClimbState : ParkourState
 {
 	private float wallRunTime;
 
+	private GameObject climbParticle;
+
 	public ClimbState(Player player) : base(player) { }
 
 	public override void Enter()
@@ -12,6 +14,9 @@ public class ClimbState : ParkourState
 
 		wallRunTime = 0f;
 		owner.velocity = Vector2.up;
+
+		climbParticle = owner.transform.GetChild(3).gameObject;
+		climbParticle.SetActive(true);
 	}
 
 	public override void Update()
@@ -39,5 +44,7 @@ public class ClimbState : ParkourState
 	public override void Exit()
 	{
 		base.Exit();
+
+		climbParticle.SetActive(false);
 	}
 }
