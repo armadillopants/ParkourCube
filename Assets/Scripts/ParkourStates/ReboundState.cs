@@ -6,8 +6,6 @@ public class ReboundState : ParkourState
 	private float reboundTime;
 	private float jumpStrength = 4f;
 
-	private GameObject reboundParticle;
-
 	public ReboundState(Player player) : base(player) { }
 
 	public override void Enter()
@@ -19,7 +17,8 @@ public class ReboundState : ParkourState
 		if (rightWallHit.collider != null)
 		{
 			owner.velocity = -Vector2.right;
-			reboundParticle = owner.transform.GetChild(1).gameObject;
+
+			owner.SetParticleActive("WallJumpLeft");
 		}
 
 		RaycastHit2D leftWallHit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(-0.6f, 0, 0), owner.GetLayerMask());
@@ -27,10 +26,9 @@ public class ReboundState : ParkourState
 		if (leftWallHit.collider != null)
 		{
 			owner.velocity = Vector2.right;
-			reboundParticle = owner.transform.GetChild(2).gameObject;
-		}
 
-		reboundParticle.SetActive(true);
+			owner.SetParticleActive("WallJumpRight");
+		}
 
 		reboundTime = 0f;
 	}
@@ -53,9 +51,11 @@ public class ReboundState : ParkourState
 
 		owner.Move(owner.velocity);
 
+		LeanTween.scaleY(owner.GetBody(), 1f, 0.1f);
+
 		if (owner.GetBody().transform.eulerAngles != Vector3.zero)
 		{
-			LeanTween.rotateZ(owner.GetBody(), 0f, 5f * Time.fixedDeltaTime);
+			LeanTween.rotateZ(owner.GetBody(), 0f, 0.1f);
 		}
 	}
 
@@ -63,6 +63,7 @@ public class ReboundState : ParkourState
 	{
 		base.Exit();
 
-		reboundParticle.SetActive(false);
+		owner.SetParticleActive("WallJumpLeft", false);
+		owner.SetParticleActive("WallJumpRight", false);
 	}
 }

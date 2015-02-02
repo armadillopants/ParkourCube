@@ -36,7 +36,7 @@ public class PullUpState : ParkourState
 		float percentage = currentLerpTime / lerpTime;
 		owner.transform.position = Vector3.Lerp(startPos, endPos, percentage);
 
-		LeanTween.rotateZ(owner.GetBody(), -25, 5f * Time.fixedDeltaTime);
+		LeanTween.rotateZ(owner.GetBody(), -25, 0.1f);
 	}
 
 	public override void Exit()

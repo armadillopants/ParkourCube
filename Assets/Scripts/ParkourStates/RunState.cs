@@ -2,8 +2,6 @@
 
 public class RunState : ParkourState
 {
-	private GameObject runParticle;
-
 	public RunState(Player player) : base(player) { }
 
 	public override void Enter()
@@ -11,10 +9,9 @@ public class RunState : ParkourState
 		base.Enter();
 
 		owner.velocity = Vector2.right;
-		LeanTween.scaleY(owner.GetBody(), 1f, 5f * Time.fixedDeltaTime);
+		LeanTween.scaleY(owner.GetBody(), 1f, 0.5f);
 
-		runParticle = owner.transform.GetChild(0).gameObject;
-		runParticle.SetActive(true);
+		owner.SetParticleActive("Run");
 	}
 
 	public override void Update()
@@ -27,7 +24,7 @@ public class RunState : ParkourState
 
 		if (owner.GetBody().transform.eulerAngles != Vector3.zero)
 		{
-			LeanTween.rotateZ(owner.GetBody(), 0f, 5f * Time.fixedDeltaTime);
+			LeanTween.rotateZ(owner.GetBody(), 0f, 0.1f);
 		}
 	}
 
@@ -35,6 +32,6 @@ public class RunState : ParkourState
 	{
 		base.Exit();
 
-		runParticle.SetActive(false);
+		owner.SetParticleActive("Run", false);
 	}
 }

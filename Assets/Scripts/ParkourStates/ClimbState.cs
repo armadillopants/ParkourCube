@@ -4,8 +4,6 @@ public class ClimbState : ParkourState
 {
 	private float wallRunTime;
 
-	private GameObject climbParticle;
-
 	public ClimbState(Player player) : base(player) { }
 
 	public override void Enter()
@@ -13,10 +11,9 @@ public class ClimbState : ParkourState
 		base.Enter();
 
 		wallRunTime = 0f;
-		owner.velocity = Vector2.up;
+		owner.velocity = Vector2.up + Vector2.right;
 
-		climbParticle = owner.transform.GetChild(3).gameObject;
-		climbParticle.SetActive(true);
+		owner.SetParticleActive("Climb");
 	}
 
 	public override void Update()
@@ -31,13 +28,13 @@ public class ClimbState : ParkourState
 			return;
 		}
 
-		owner.Move(owner.velocity + Vector2.right);
+		owner.Move(owner.velocity);
 
 		RaycastHit2D rightWallHit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(0.6f, 0f, 0), owner.GetLayerMask());
 
 		if (rightWallHit.collider != null)
 		{
-			LeanTween.rotateZ(owner.GetBody(), 45, 5f * Time.fixedDeltaTime);
+			LeanTween.rotateZ(owner.GetBody(), 45, 0.1f);
 		}
 	}
 
@@ -45,6 +42,6 @@ public class ClimbState : ParkourState
 	{
 		base.Exit();
 
-		climbParticle.SetActive(false);
+		owner.SetParticleActive("Climb", false);
 	}
 }

@@ -5,8 +5,6 @@ public class SlideState : ParkourState
 	private float slideTime;
 	private float slideSpeed = 3f;
 
-	private GameObject slideParticle;
-
 	public SlideState(Player player) : base(player) { }
 
 	public override void Enter()
@@ -17,8 +15,7 @@ public class SlideState : ParkourState
 
 		owner.velocity = Vector2.right;
 
-		slideParticle = owner.transform.GetChild(5).gameObject;
-		slideParticle.SetActive(true);
+		owner.SetParticleActive("Slide");
 	}
 
 	public override void Update()
@@ -31,16 +28,20 @@ public class SlideState : ParkourState
 		{
 			owner.SetState(new RunState(owner));
 		}
+		else
+		{
+			LeanTween.scaleY(owner.GetBody(), 0.8f, 0.3f);
+		}
 
 		owner.Move(owner.velocity * slideSpeed);
 
-		LeanTween.rotateZ(owner.GetBody(), 85, 5f * Time.fixedDeltaTime);
+		LeanTween.rotateZ(owner.GetBody(), 85, 0.1f);
 	}
 
 	public override void Exit()
 	{
 		base.Exit();
 
-		slideParticle.SetActive(false);
+		owner.SetParticleActive("Slide", false);
 	}
 }

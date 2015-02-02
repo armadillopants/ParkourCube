@@ -21,14 +21,14 @@ public class HangState : ParkourState
 
 		if (rightWallHit.collider != null)
 		{
-			LeanTween.rotateZ(owner.GetBody(), 45, 5f * Time.fixedDeltaTime);
+			LeanTween.rotateZ(owner.GetBody(), 45, 0.1f);
 		}
 
 		RaycastHit2D leftWallHit = Physics2D.Linecast(owner.transform.position, owner.transform.position + new Vector3(-0.6f, 0, 0), owner.GetLayerMask());
 
 		if (leftWallHit.collider != null)
 		{
-			LeanTween.rotateZ(owner.GetBody(), -45, 5f * Time.fixedDeltaTime);
+			LeanTween.rotateZ(owner.GetBody(), -45, 0.1f);
 		}
 	}
 
@@ -42,6 +42,10 @@ public class HangState : ParkourState
 		{
 			owner.SetState(new FallState(owner));
 			return;
+		}
+		else
+		{
+			LeanTween.scaleY(owner.GetBody(), 0.8f, 0.1f);
 		}
 
 		owner.transform.position = hangPos;

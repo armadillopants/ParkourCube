@@ -6,8 +6,6 @@ public class VaultState : ParkourState
 	private float yMod = 1.5f;
 	private float vaultTime;
 
-	private GameObject vaultParticle;
-
 	public VaultState(Player player) : base(player) { }
 
 	public override void Enter()
@@ -17,10 +15,7 @@ public class VaultState : ParkourState
 		vaultTime = 0f;
 		owner.velocity = Vector2.right;
 
-		LeanTween.rotateZ(owner.GetBody(), -45, 5f * Time.fixedDeltaTime);
-
-		vaultParticle = owner.transform.GetChild(4).gameObject;
-		vaultParticle.SetActive(true);
+		owner.SetParticleActive("Vault");
 	}
 
 	public override void Update()
@@ -34,16 +29,22 @@ public class VaultState : ParkourState
 			owner.SetState(new RunState(owner));
 			return;
 		}
+		else
+		{
+			LeanTween.scaleY(owner.GetBody(), 0.5f, 0.3f);
+		}
 
 		owner.velocity.y += yMod * Time.fixedDeltaTime;
 
 		owner.Move(owner.velocity * speedBoost);
+
+		LeanTween.rotateZ(owner.GetBody(), -45, 0.1f);
 	}
 
 	public override void Exit()
 	{
 		base.Exit();
 
-		vaultParticle.SetActive(false);
+		owner.SetParticleActive("Vault", false);
 	}
 }

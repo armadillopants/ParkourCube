@@ -5,8 +5,6 @@ public class RollState : ParkourState
 
 	private float rollTime;
 
-	private GameObject rollParticle;
-
 	public RollState(Player player) : base(player) { }
 
 	public override void Enter()
@@ -17,8 +15,7 @@ public class RollState : ParkourState
 
 		owner.velocity = Vector2.right;
 
-		rollParticle = owner.transform.GetChild(6).gameObject;
-		rollParticle.SetActive(true);
+		owner.SetParticleActive("Roll");
 	}
 
 	public override void Update()
@@ -29,8 +26,8 @@ public class RollState : ParkourState
 
 		if (rollTime > 0f)
 		{
-			owner.GetBody().transform.Rotate(-Vector3.forward, 600f * Time.fixedDeltaTime);
-			LeanTween.scaleY(owner.GetBody(), 0.5f, 5f * Time.fixedDeltaTime);
+			LeanTween.rotateAround(owner.GetBody(), -Vector3.forward, 90f, 0.1f);
+			LeanTween.scaleY(owner.GetBody(), 0.5f, 0.1f);
 		}
 		else
 		{
@@ -45,9 +42,9 @@ public class RollState : ParkourState
 	{
 		base.Exit();
 
-		LeanTween.scaleY(owner.GetBody(), 1f, 5f * Time.fixedDeltaTime);
+		LeanTween.scaleY(owner.GetBody(), 1f, 0.1f);
 		owner.GetBody().transform.eulerAngles = Vector3.zero;
 
-		rollParticle.SetActive(false);
+		owner.SetParticleActive("Roll", false);
 	}
 }

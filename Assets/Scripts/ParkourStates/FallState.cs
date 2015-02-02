@@ -29,7 +29,7 @@ public class FallState : ParkourState
 
 		if (owner.GetBody().transform.eulerAngles != Vector3.zero)
 		{
-			LeanTween.rotateZ(owner.GetBody(), 0, 5f * Time.fixedDeltaTime);
+			LeanTween.rotateZ(owner.GetBody(), 0, 0.1f);
 		}
 	}
 

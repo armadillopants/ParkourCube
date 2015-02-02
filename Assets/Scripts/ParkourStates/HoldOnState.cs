@@ -21,7 +21,7 @@ public class HoldOnState : ParkourState
 
 		if (owner.GetBody().transform.eulerAngles != Vector3.zero)
 		{
-			LeanTween.rotateZ(owner.GetBody(), 0f, 5f * Time.fixedDeltaTime);
+			LeanTween.rotateZ(owner.GetBody(), 0f, 0.1f);
 		}
 	}
 

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
@@ -25,8 +26,12 @@ public class Player : MonoBehaviour
 	private Obstacle obstacle;
 	private GameObject obstacleRoot;
 
+	private Dictionary<string, GameObject> particleDict = new Dictionary<string, GameObject>();
+
 	void Start()
 	{
+		AddParticles();
+
 		rigid = rigidbody2D;
 
 		playerLayer = ~(1 << LayerMask.NameToLayer("Player"));
@@ -103,5 +108,21 @@ public class Player : MonoBehaviour
 	public GameObject GetBody()
 	{
 		return body;
+	}
+
+	private void AddParticles()
+	{
+		Transform particles = GameObject.Find("Particles").transform;
+
+		foreach (Transform child in particles)
+		{
+			particleDict.Add(child.name, child.gameObject);
+			child.gameObject.SetActive(false);
+		}
+	}
+
+	public void SetParticleActive(string particle, bool active = true)
+	{
+		particleDict[particle].SetActive(active);
 	}
 }

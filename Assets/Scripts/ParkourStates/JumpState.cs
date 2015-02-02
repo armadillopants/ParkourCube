@@ -8,8 +8,6 @@ public class JumpState : ParkourState
 
 	private float gravity = 6f;
 
-	private GameObject jumpParticle;
-
 	public JumpState(Player player) : base(player) { }
 
 	public override void Enter()
@@ -18,8 +16,7 @@ public class JumpState : ParkourState
 
 		jumpTime = 0f;
 
-		jumpParticle = owner.transform.GetChild(7).gameObject;
-		jumpParticle.SetActive(true);
+		owner.SetParticleActive("Jump");
 	}
 
 	public override void Update()
@@ -30,6 +27,8 @@ public class JumpState : ParkourState
 
 		if (jumpTime > 0.3f)
 		{
+			LeanTween.scale(owner.GetBody(), new Vector3(0.5f, 1f, 0f), 0.1f);
+
 			owner.velocity.y -= gravity * Time.fixedDeltaTime;
 
 			RaycastHit2D hit = Physics2D.Linecast(owner.transform.position, owner.transform.position - new Vector3(0, 0.6f, 0), owner.GetLayerMask());
@@ -42,6 +41,7 @@ public class JumpState : ParkourState
 		}
 		else
 		{
+			LeanTween.scale(owner.GetBody(), new Vector3(0.3f, 1.2f, 0f), 0.1f);
 			owner.velocity.y += jumpStrength * Time.fixedDeltaTime;
 		}
 
@@ -49,7 +49,7 @@ public class JumpState : ParkourState
 
 		if (owner.GetBody().transform.eulerAngles != Vector3.zero)
 		{
-			LeanTween.rotateZ(owner.GetBody(), 0, 5f * Time.fixedDeltaTime);
+			LeanTween.rotateZ(owner.GetBody(), 0, 0.1f);
 		}
 	}
 
@@ -57,6 +57,7 @@ public class JumpState : ParkourState
 	{
 		base.Exit();
 
-		jumpParticle.SetActive(false);
+		LeanTween.scale(owner.GetBody(), new Vector3(0.5f, 1f, 0f), 0.1f);
+		owner.SetParticleActive("Jump", false);
 	}
 }
