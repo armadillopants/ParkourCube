@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
 
 	private Dictionary<string, GameObject> particleDict = new Dictionary<string, GameObject>();
 
+	public AudioClip jump;
+
 	void Start()
 	{
 		AddParticles();

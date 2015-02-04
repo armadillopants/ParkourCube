@@ -32,14 +32,13 @@ public class ObjectPool
 
 		GameObject instance = pool.Pop();
 		instance.SetActive(true);
-		//Debug.Log(instance.GetInstanceID());
 		return instance;
 	}
 
 	public void Return(PooledObject obj)
 	{
 		var scripts = obj.GetComponentsInChildren<MonoBehaviour>().Where(x => x is IPoolable);
-		//obj.gameObject.SetActive(false);
+		obj.gameObject.SetActive(false);
 		foreach(MonoBehaviour script in scripts)
 		{
 			((IPoolable)script).Reset();
@@ -59,7 +58,7 @@ public class ObjectPool
 			Debug.LogWarning("No PooledObject script found on " + prefab.name);
 		}
 		pObj.SetPool(this);
-		//instance.SetActive(false);
+		instance.SetActive(false);
 		pool.Push(instance);
 	}
 }

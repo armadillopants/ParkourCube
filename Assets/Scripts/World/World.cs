@@ -68,7 +68,7 @@ public class World : Singleton<World>
 			Debug.LogError("Move the DoomWall prefab to Resources folder, Matt.");
 			Debug.Break();
 		}
-		GameObject dInst = GameObject.Instantiate(dWall, new Vector3(-10000f, 0f, 0f), Quaternion.identity) as GameObject;
+		GameObject dInst = GameObject.Instantiate(dWall, new Vector3(-10000f, 0f, -1f), Quaternion.identity) as GameObject;
 		doomWall = dInst.GetComponent<DoomWall>();
 
 		spawned.Add(dInst);

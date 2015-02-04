@@ -9,7 +9,8 @@ public class RunState : ParkourState
 		base.Enter();
 
 		owner.velocity = Vector2.right;
-		LeanTween.scaleY(owner.GetBody(), 1f, 0.5f);
+
+		LeanTween.scale(owner.GetBody(), new Vector3(0.5f, 1f, 0f), 0.1f);
 
 		owner.SetParticleActive("Run");
 	}
