@@ -52,6 +52,7 @@ public class DoomWall : MonoBehaviour
 	public void PushBack()
 	{
 		offset = Mathf.Clamp(offset, 0f, offset - pushback);
+		maxModifier += 0.01f;
 	}
 
 	void OnTriggerEnter2D(Collider2D other)

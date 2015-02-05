@@ -11,7 +11,7 @@ public class World : Singleton<World>
 	public const int WATCH_TIME = 1;
 	private const float REPEAT_MOD =  0.6f;
 
-	private const float MIN_DISTANCE = 5f;
+	private const float MIN_DISTANCE = 3f;
 	private const float MAX_DISTANCE = 10f;
 	private const float DISTANCE_RANGE = MAX_DISTANCE - MIN_DISTANCE;
 	private const float TERRAIN_SCORE_DIVISOR = 25f;
