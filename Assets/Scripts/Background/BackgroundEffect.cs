@@ -12,19 +12,15 @@ public class BackgroundEffect : MonoBehaviour
 	private Vector3 newScale;
 	private Color newColor;
 
-	private Vector3 randomRotate;
-
 	void Awake()
 	{
 		rotateSpeed = Random.Range(5f, 20f);
 
-		newScale = new Vector3(Random.Range(0.1f, 0.5f), Random.Range(0.1f, 0.5f), Random.Range(0.1f, 0.5f));
+		newScale = new Vector3(Random.Range(0.1f, 0.5f), Random.Range(0.1f, 0.5f), 1);
 		transform.localScale = newScale;
 
 		newColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
 		renderer.material.color = newColor;
-
-		randomRotate = new Vector3(Random.value, Random.value, Random.value);
 
 		InvokeRepeating("SwitchEffect", Random.Range(3f, 5f), Random.Range(1f, 3f));
 	}
@@ -34,7 +30,7 @@ public class BackgroundEffect : MonoBehaviour
 		transform.localScale = Vector3.Lerp(transform.localScale, newScale, 1.5f * Time.deltaTime);
 		renderer.material.color = Color.Lerp(renderer.material.color, newColor, 1.5f * Time.deltaTime);
 
-		transform.Rotate(randomRotate, rotateSpeed * Time.deltaTime, Space.Self);
+		transform.Rotate(Vector3.forward, rotateSpeed * Time.deltaTime, Space.Self);
 	}
 
 	void SwitchEffect()

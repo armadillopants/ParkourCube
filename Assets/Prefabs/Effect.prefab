@@ -43,7 +43,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -57,7 +57,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193424}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &11465720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -69,8 +69,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d03be1e9c6bac4d44b1343cf498aabad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zDistance: 0
-  parallaxAmount: 0
 --- !u!114 &11493422
 MonoBehaviour:
   m_ObjectHideFlags: 1
