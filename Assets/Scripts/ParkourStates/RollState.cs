@@ -16,6 +16,8 @@ public class RollState : ParkourState
 		owner.velocity = Vector2.right;
 
 		owner.SetParticleActive("Roll");
+
+		LeanTween.delayedSound(owner.roll, owner.transform.position, 1f);
 	}
 
 	public override void Update()

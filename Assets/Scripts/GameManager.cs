@@ -13,7 +13,8 @@ public class GameManager : MSingleton<GameManager>
 	public GameObject normalObject;
 
 	private string fellToDeath;
-	private string[] causeOfDeath = new string[4] { "The Doom Wall was too quick!", "You weren't fast enough.", "Epic Fail", "Oops, you died." };
+	private string[] causeOfDeath = new string[] { "The Doom Wall was too quick!", "You weren't fast enough.", "Epic Fail.", "Oops, you died.", 
+														"You choked!", "You lost the battle, but not the war!", "Run faster next time.", "You lost." };
 
 	public bool TutorialCompleted
 	{
@@ -133,14 +134,7 @@ public class GameManager : MSingleton<GameManager>
 		else
 		{
 			int rand = Random.Range(0, causeOfDeath.Length);
-
-			for (int i = 0; i < causeOfDeath.Length; i++)
-			{
-				if (i == rand)
-				{
-					causeOfDeathText.text = causeOfDeath[i];
-				}
-			}
+			causeOfDeathText.text = causeOfDeath[rand];
 		}
 
 	}

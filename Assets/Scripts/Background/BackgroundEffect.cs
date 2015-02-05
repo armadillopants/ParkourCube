@@ -16,7 +16,7 @@ public class BackgroundEffect : MonoBehaviour
 	{
 		rotateSpeed = Random.Range(5f, 20f);
 
-		newScale = new Vector3(Random.Range(0.1f, 0.5f), Random.Range(0.1f, 0.5f), 1);
+		newScale = new Vector3(Random.Range(0.1f, 1), Random.Range(0.1f, 1), 1);
 		transform.localScale = newScale;
 
 		newColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
@@ -35,7 +35,7 @@ public class BackgroundEffect : MonoBehaviour
 
 	void SwitchEffect()
 	{
-		newScale = new Vector3(Random.Range(0.1f, 0.5f), Random.Range(0.1f, 0.5f), Random.Range(0.1f, 0.5f));
+		newScale = new Vector3(Random.Range(0.1f, 1f), Random.Range(0.1f, 1f), 1);
 		newColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
 	}
 }

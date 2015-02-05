@@ -31,6 +31,9 @@ public class Player : MonoBehaviour
 	public AudioClip jump;
 	public AudioClip vault;
 	public AudioClip rebound;
+	public AudioClip roll;
+	public AudioClip pullup;
+	public AudioClip climb;
 
 	void Start()
 	{

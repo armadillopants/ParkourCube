@@ -40,6 +40,12 @@ public class ParallaxObject : MonoBehaviour
 			wasOnScreen = false;
 			Vector3 newPos = transform.position;
 			newPos.x = Camera.main.ViewportToWorldPoint(Vector2.right).x + renderer.bounds.extents.x + 1f;
+			if (newPos.y < (Camera.main.transform.position.y - Camera.main.rect.center.y / 2) || newPos.y > (Camera.main.transform.position.y + Camera.main.rect.center.y / 2))
+			{
+				newPos.y = Camera.main.ViewportToWorldPoint(new Vector3(0, Random.value, 0)).y;
+
+				Debug.Log("Moving object to position: " + newPos.y);
+			}
 			transform.position = newPos;
 		}
 		

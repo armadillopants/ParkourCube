@@ -14,6 +14,8 @@ public class ClimbState : ParkourState
 		owner.velocity = Vector2.up + Vector2.right;
 
 		owner.SetParticleActive("Climb");
+
+		LeanTween.delayedSound(owner.climb, owner.transform.position, 1f);
 	}
 
 	public override void Update()
