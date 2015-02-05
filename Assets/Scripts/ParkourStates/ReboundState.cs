@@ -30,7 +30,7 @@ public class ReboundState : ParkourState
 			owner.SetParticleActive("WallJumpRight");
 		}
 
-		LeanTween.delayedSound(owner.rebound, owner.transform.position, 1f);
+		LeanTween.delayedSound(owner.rebound, Vector3.zero, 1f);
 
 		reboundTime = 0f;
 	}

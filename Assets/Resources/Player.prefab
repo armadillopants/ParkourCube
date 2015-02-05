@@ -538,6 +538,10 @@ MonoBehaviour:
   jump: {fileID: 8300000, guid: 145e493a737cfa84b965eff30cced2bb, type: 3}
   vault: {fileID: 8300000, guid: 8e0a65a7874463340a2a663c741da3aa, type: 3}
   rebound: {fileID: 8300000, guid: 0b988ac25eee6c246b2f94fd7decc5c3, type: 3}
+  roll: {fileID: 8300000, guid: d81716cd6cbde124b94ecc0252d8117d, type: 3}
+  pullup: {fileID: 8300000, guid: 4896b338daa64804080c5ee6ee36f869, type: 3}
+  climb: {fileID: 8300000, guid: 7af09cb4f0bf3fd448f815b9306922c0, type: 3}
+  slide: {fileID: 8300000, guid: 4ba68543f44c88d48b12f1ae24052180, type: 3}
 --- !u!114 &11427830
 MonoBehaviour:
   m_ObjectHideFlags: 1

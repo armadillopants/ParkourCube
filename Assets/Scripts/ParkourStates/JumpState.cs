@@ -18,7 +18,7 @@ public class JumpState : ParkourState
 
 		owner.SetParticleActive("Jump");
 
-		LeanTween.delayedSound(owner.jump, owner.GetBody().transform.position, 1f);
+		LeanTween.delayedSound(owner.jump, Vector3.zero, 1f);
 	}
 
 	public override void Update()

@@ -16,6 +16,8 @@ public class SlideState : ParkourState
 		owner.velocity = Vector2.right;
 
 		owner.SetParticleActive("Slide");
+
+		LeanTween.delayedSound(owner.slide, Vector3.zero, 1f);
 	}
 
 	public override void Update()

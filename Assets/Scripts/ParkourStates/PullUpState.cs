@@ -19,7 +19,7 @@ public class PullUpState : ParkourState
 		startPos = owner.transform.position;
 		endPos = owner.transform.position + owner.transform.up + owner.transform.right * travelDistance;
 
-		LeanTween.delayedSound(owner.pullup, owner.transform.position, 1f);
+		LeanTween.delayedSound(owner.pullup, Vector3.zero, 1f);
 	}
 
 	public override void Update()
