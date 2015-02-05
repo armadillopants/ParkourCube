@@ -48,6 +48,7 @@ GameObject:
   - 92: {fileID: 9200000}
   - 124: {fileID: 12400000}
   - 81: {fileID: 8100000}
+  - 114: {fileID: 11427830}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1520,6 +1521,8 @@ MonoBehaviour:
   canMove: 1
   body: {fileID: 100000}
   jump: {fileID: 8300000, guid: 145e493a737cfa84b965eff30cced2bb, type: 3}
+  vault: {fileID: 8300000, guid: 8e0a65a7874463340a2a663c741da3aa, type: 3}
+  rebound: {fileID: 8300000, guid: 0b988ac25eee6c246b2f94fd7decc5c3, type: 3}
 --- !u!114 &11407632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1721,6 +1724,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70fd9ab9ac44cb540b28dd18d1704c54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11427830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7cc44644ff4c641bdeb85f9ac799bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialAmount: 15
+  bgPrefabs:
+  - {fileID: 193424, guid: d0cd9a07ad771904399ff86a4bcd902d, type: 2}
+  zDepth: 15
+  cam: {fileID: 400004}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

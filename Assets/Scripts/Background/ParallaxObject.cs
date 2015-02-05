@@ -10,6 +10,9 @@ public enum ParallaxLevel
 public class ParallaxObject : MonoBehaviour
 {
 	private readonly float[] parallaxValues = { 0.6f, 0.3f, 0.1f };
+	private readonly float[] zDistances = { 1f, 8f, 15f };
+
+	private float zDistance;
 	private float parallaxAmount;
 	private bool wasOnScreen;
 
@@ -17,12 +20,14 @@ public class ParallaxObject : MonoBehaviour
 	{
 		System.Random random = new System.Random();
 		parallaxAmount = parallaxValues[random.Next(0, 3)];
+		zDistance = zDistances[random.Next(0, 3)];
 	}
 
 	public void UpdatePosition(Vector3 cDelta)
 	{
 		Vector3 newPos = transform.localPosition;
 		newPos += cDelta * parallaxAmount;
+		newPos.z = zDistance;
 		transform.localPosition = newPos;
 
 		MoveIfOffScreen();
@@ -34,7 +39,7 @@ public class ParallaxObject : MonoBehaviour
 		{
 			wasOnScreen = false;
 			Vector3 newPos = transform.position;
-			newPos.x = Camera.main.ViewportToWorldPoint(Vector2.right).x + collider.bounds.extents.x + 1f;
+			newPos.x = Camera.main.ViewportToWorldPoint(Vector2.right).x + renderer.bounds.extents.x + 1f;
 			transform.position = newPos;
 		}
 		

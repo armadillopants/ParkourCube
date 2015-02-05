@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
 	private Dictionary<string, GameObject> particleDict = new Dictionary<string, GameObject>();
 
 	public AudioClip jump;
+	public AudioClip vault;
+	public AudioClip rebound;
 
 	void Start()
 	{

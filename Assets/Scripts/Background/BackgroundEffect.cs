@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class BackgroundEffect : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class BackgroundEffect : MonoBehaviour
 	private Vector3 newScale;
 	private Color newColor;
 
+	private Vector3 randomRotate;
+
 	void Awake()
 	{
 		rotateSpeed = Random.Range(5f, 20f);
@@ -21,16 +24,17 @@ public class BackgroundEffect : MonoBehaviour
 		newColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
 		renderer.material.color = newColor;
 
-		InvokeRepeating("SwitchEffect", 3f, 3f);
+		randomRotate = new Vector3(Random.value, Random.value, Random.value);
+
+		InvokeRepeating("SwitchEffect", Random.Range(3f, 5f), Random.Range(1f, 3f));
 	}
 
 	void LateUpdate()
 	{
-		transform.localScale = Vector3.Lerp(transform.localScale, newScale, 0.5f * Time.deltaTime);
-		renderer.material.color = Color.Lerp(renderer.material.color, newColor, 0.5f * Time.deltaTime);
+		transform.localScale = Vector3.Lerp(transform.localScale, newScale, 1.5f * Time.deltaTime);
+		renderer.material.color = Color.Lerp(renderer.material.color, newColor, 1.5f * Time.deltaTime);
 
-		transform.Rotate(Vector3.right, rotateSpeed * Time.deltaTime);
-		transform.Rotate(Vector3.up, rotateSpeed * Time.deltaTime);
+		transform.Rotate(randomRotate, rotateSpeed * Time.deltaTime, Space.Self);
 	}
 
 	void SwitchEffect()

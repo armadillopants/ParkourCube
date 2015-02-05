@@ -30,7 +30,7 @@ public class BGUpdater : MonoBehaviour
 	{
 		Vector3 delta = cam.position - lastCamPosition;
 		delta.x *= -1f;
-		delta.z = 0f;
+		//delta.z = 0f;
 
 		foreach(ParallaxObject bgObj in bgObjects)
 		{
@@ -50,8 +50,6 @@ public class BGUpdater : MonoBehaviour
 
 			int val = random.Next(0, bgPrefabs.Count);
 			GameObject instance = Instantiate(bgPrefabs[val], worldPos, Quaternion.identity) as GameObject;
-
-			//if(!instance) { continue; }
 			
 			ParallaxObject pObj = instance.GetComponent<ParallaxObject>();
 			pObj.RollRandomLevel();

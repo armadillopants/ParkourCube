@@ -16,6 +16,8 @@ public class VaultState : ParkourState
 		owner.velocity = Vector2.right;
 
 		owner.SetParticleActive("Vault");
+
+		LeanTween.delayedSound(owner.vault, owner.transform.position, 1f);
 	}
 
 	public override void Update()
