@@ -201,6 +201,8 @@ public class World : Singleton<World>
 		{
 			instance.playerScore += 2;
 			GameManager.Instance.UpdateScore(instance.playerScore);
+			GameManager.multiplier += 1;
+			GameManager.Instance.DisplayCombo(player.transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(2.5f, 3f), 0f));
 		}
 		instance.BuildNext();
 		obstacle.FlagForDeletion();

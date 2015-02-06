@@ -87,6 +87,10 @@ public class Obstacle : WorldObject
 					}
 					else
 					{
+						if (gameObject.name != "Rebound Wall Flat" && gameObject.name != "Rebound Wall Up")
+						{
+							GameManager.multiplier = 0;
+						}
 						Instantiate(GameManager.Instance.normalObject, priorityList[i].transform.position, Quaternion.identity);
 						World.ReportNormalObstacleUse(this);
 					}

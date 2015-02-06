@@ -42,7 +42,6 @@ public class ParallaxObject : MonoBehaviour
 			newPos.x = Camera.main.ViewportToWorldPoint(Vector2.right).x + renderer.bounds.extents.x + 1f;
 
 			float vertExtent = Camera.main.camera.orthographicSize;
-			float horzExtent = vertExtent * Screen.width / Screen.height;
 
 			float bottomBound = (float)(vertExtent - renderer.bounds.size.y / 2.0f);
 			float topBound = (float)(renderer.bounds.size.y / 2.0f - vertExtent);

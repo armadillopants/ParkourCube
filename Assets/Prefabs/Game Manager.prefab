@@ -1147,6 +1147,7 @@ MonoBehaviour:
   pauseButton: {fileID: 174814}
   perfectObject: {fileID: 115802, guid: 08df426ad9048ca4ab9f6c60b9f7582d, type: 2}
   normalObject: {fileID: 115802, guid: 6bf8d7edc6e628f41b908d85c21f700e, type: 2}
+  comboObject: {fileID: 170850, guid: 268a657d8d6742144a8ace4a9873bf15, type: 2}
 --- !u!114 &11474826
 MonoBehaviour:
   m_ObjectHideFlags: 1
